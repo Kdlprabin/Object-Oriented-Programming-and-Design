@@ -1,10 +1,12 @@
+package Question1;
 public class Samsung extends Mobile{
+
+    //adding the variable
     private int modelNumber;
-    final String ringToneString;
-    public Samsung(String nameString, String brandString, int modelNumber, String ringToneString){
+    public Samsung(String nameString, String brandString, int modelNumber){
+        //calling constructor of parent class
         super(nameString, brandString);
         this.modelNumber = modelNumber;
-        this.ringToneString = ringToneString;
     }
     
     //getter methods
@@ -17,7 +19,8 @@ public class Samsung extends Mobile{
         this.modelNumber = modelNumber;
     }
 
-    @override
+    //overriding methods from the parent class mobile
+    @Override
     public void vibrates(){
         System.out.println("//////The mobile vibrates with Samsung ringtone//////");
     }
