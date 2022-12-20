@@ -6,6 +6,7 @@ public class SignUp {
     private String password;
     private String confirmPassword;
     private String dob;
+    private String[] data;
 
     // constructor
     public SignUp() {
@@ -23,14 +24,24 @@ public class SignUp {
         validateAll();
     }
 
+    private void saveData() {
+        this.data[0] = this.name;
+        this.data[1] = this.contact;
+        this.data[2] = this.password;
+        this.data[3] = this.dob;
+    }
+
     public void validateAll() {
         Validate validate = new Validate();
         boolean valName = validate.validateName(this.name);
         boolean valContact = validate.validateContact(this.contact);
         boolean valPassword = validate.validateCheckPassword(this.password, this.confirmPassword);
         boolean valPasswordMatch = validate.validatePassword(this.password);
-        if (valName && valPassword && valContact && valPasswordMatch){
+        if (valName && valPassword && valContact && valPasswordMatch) {
             System.out.println("You have successfully signed up.\n");
+            // save the data of the user
+            saveData();
+
         } else {
             System.out.println("Some of the input fields are not valid.\n");
             if (!valName) {
@@ -42,7 +53,7 @@ public class SignUp {
             if (!valPassword) {
                 System.out.println("Your passwords are not matching.\nPlease start again.");
             }
-            if(!valPasswordMatch){
+            if (!valPasswordMatch) {
                 System.out.println("Your password does not matches the format");
             }
         }
