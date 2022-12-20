@@ -1,3 +1,4 @@
+package Users;
 public interface TenantRights {
     void leaveRentedRoom();
 

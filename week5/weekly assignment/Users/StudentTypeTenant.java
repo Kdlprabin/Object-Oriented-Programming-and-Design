@@ -1,3 +1,4 @@
+package Users;
 public class StudentTypeTenant extends Tenant{
 
     @Override

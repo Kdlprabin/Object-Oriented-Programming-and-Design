@@ -1,3 +1,4 @@
+package Users;
 public class FamilyTypeTenant extends Tenant{
 
     @Override

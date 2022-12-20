@@ -1,8 +1,6 @@
-public class Landlord extends SystemUser {
+package Users;
+public class Admin extends SystemUser{
 
-    private String property;
-    private int contact;
-    private float rentalCharge;
     @Override
     public void login() {
         // TODO Auto-generated method stub
