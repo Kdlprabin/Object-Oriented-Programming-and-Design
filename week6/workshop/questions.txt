@@ -1,0 +1,12 @@
+what is abstraction?
+how can it be achieved ?
+what is abstract class and interface ?
+what is abstract method ?
+why do we need interface even though there is abstract class? 
+why don't we make abstract object though constructor is made ?
+what are interface default variables ?
+why constructor in interface but not in abstract ?
+interface solves multiple inheritance problem ?
+why do we extend run time exception and dont make object?
+how can we make custom exception ?
+what does new keyword mean ?
