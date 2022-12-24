@@ -1,51 +1,53 @@
 package Users;
-public class FamilyTypeTenant extends Tenant{
 
+import java.util.Scanner;
+
+public class FamilyTypeTenant extends Tenant{
+    private String username;
+    private String password;
     @Override
     public void viewLandlord() {
-        // TODO Auto-generated method stub
-        
     }
 
     @Override
     public void selectLandlord() {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
     public void login() {
-        // TODO Auto-generated method stub
-        
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the username : ");
+        String username = scanner.next();
+        System.out.println("Enter the password : ");
+        String password = scanner.next();
+        if (username != this.username && password != this.password) {
+            System.out.println("The username or password invalid.");
+        }
     }
 
     @Override
     public void logout() {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
     public void leaveRentedRoom() {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
     public void requestEmergencyPayment() {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
     public void reviewLandlordBehavior() {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
     public void reviewRentalProperty() {
-        // TODO Auto-generated method stub
         
     }
     
