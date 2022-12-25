@@ -3,8 +3,12 @@ package Users;
 import java.util.Scanner;
 
 public class FamilyTypeTenant extends Tenant{
-    private String username;
-    private String password;
+    private String username = "tenant";
+    private String password = "tenant123";
+
+    public FamilyTypeTenant(){
+        login();
+    }
     @Override
     public void viewLandlord() {
     }
@@ -21,8 +25,10 @@ public class FamilyTypeTenant extends Tenant{
         String username = scanner.next();
         System.out.println("Enter the password : ");
         String password = scanner.next();
-        if (username != this.username && password != this.password) {
-            System.out.println("The username or password invalid.");
+        if (this.username.equals(username) && this.password.equals(password)) {
+            System.out.println("!!! Login Successful !!!.");
+        }else{
+            System.out.println("!!! Login Failed !!!\nUsername or Password not matching.");
         }
     }
 

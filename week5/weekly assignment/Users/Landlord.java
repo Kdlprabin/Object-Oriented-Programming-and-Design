@@ -7,9 +7,12 @@ public class Landlord extends SystemUser {
     private String property;
     private int contact;
     private float rentalCharge;
-    private String landLordUsername;
-    private String landLordPassword;
+    private String username = "landlord";
+    private String password = "landlord123";
 
+    public Landlord(){
+        login();
+    }
     @Override
     public void login() {
         Scanner scanner = new Scanner(System.in);
@@ -17,8 +20,10 @@ public class Landlord extends SystemUser {
         String username = scanner.next();
         System.out.println("Enter the password : ");
         String password = scanner.next();
-        if (username != this.landLordUsername && password != this.landLordPassword) {
-            System.out.println("The username or password invalid.");
+        if (this.username.equals(username) && this.password.equals(password)) {
+            System.out.println("!!! Login Successful !!!.");
+        }else{
+            System.out.println("!!! Login Failed !!!\nUsername or Password not matching.");
         }
     }
 

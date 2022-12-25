@@ -22,22 +22,23 @@ public class Main {
             }
         }
         if (checker) {
-            System.out.printf("Welcome %s!", role);
+            System.out.printf("Welcome %s!\n", role);
             switch (role) {
                 case "admin":
                     Admin admin = new Admin();
                     break;
                 case "tenant":
                     System.out.println(
-                            "Enter the type of tenant you are: \n1 for family type tenant.\n2 for Student type tenant.");
+                            "\nEnter the type of tenant you are: \n1 for family type tenant.\n2 for Student type tenant.");
                     int type = scanner.nextInt();
                     if (type == 1) {
                         FamilyTypeTenant tenant = new FamilyTypeTenant();
                     } else if (type == 2) {
                         StudentTypeTenant tenat = new StudentTypeTenant();
                     } else {
-                        System.out.println("Please enter a valid input.");
+                        System.out.println("\nPlease enter a valid input.");
                     }
+                    break;
                 case "landlord":
                     Landlord landlord = new Landlord();
                     break;
@@ -51,6 +52,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        System.out.println("\nWelcome to the Room Rental System.\n");
         Main main = new Main();
     }
 }

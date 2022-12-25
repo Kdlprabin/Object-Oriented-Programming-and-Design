@@ -23,9 +23,10 @@ public class Admin extends SystemUser {
         String username = scanner.next();
         System.out.println("Enter the password : ");
         String password = scanner.next();
-        if (username != this.adminUsername && password != this.adminPassword) {
-            System.out.println("The username or password invalid.");
-
+        if (this.adminUsername.equals(username) && this.adminPassword.equals(password)) {
+            System.out.println("!!! Login Successful !!!");
+        }else{
+            System.out.println("!!! Login Failed !!!\nUsername or Password not matching.");
         }
 
     }
