@@ -1,5 +1,6 @@
 package Users;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Landlord extends SystemUser {
@@ -9,6 +10,10 @@ public class Landlord extends SystemUser {
     private float rentalCharge;
     private String username = "landlord";
     private String password = "landlord123";
+    String[] tenant1 = { "Prabin", "20", "9841265446", "Passport", "Dhading", "2003-11-17" };
+    String[] bill1 = { "Prabin", "9841265446", "50000" };
+    private ArrayList<String[]> tenantInfo = new ArrayList<>();
+    private ArrayList<String[]> billInfo = new ArrayList<>();
 
     public Landlord() {
         login();
@@ -16,6 +21,7 @@ public class Landlord extends SystemUser {
 
     @Override
     public void login() {
+        tenantInfo.add(tenant1);
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the username : ");
         String username = scanner.next();
@@ -57,13 +63,27 @@ public class Landlord extends SystemUser {
     }
 
     public void viewTenants() {
-
+        System.out.println("The Tenants are :");
+        for (String[] tenant : tenantInfo) {
+            System.out.println(tenant[0]);
+        }
     }
 
     public void addBills() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the Name: ");
+        String name = scanner.next();
+        System.out.println("Enter the Contact: ");
+        String contact = scanner.next();
+        System.out.println("Enter the Amount: ");
+        String amount = scanner.next();
+        String[] bill = { name, contact, amount };
+        billInfo.add(bill);
     }
 
     public void countTenants() {
+        int length = tenantInfo.size();
+        System.out.println("The count of Tenants is : " + length);
     }
 
 }

@@ -11,7 +11,7 @@ public class Admin extends SystemUser {
     private ArrayList<String[]> tenantInfo = new ArrayList<>();
 
     // initial information
-    private String[] landLord1 = { "Prabin", "Lalitpur", "9841265446", "5000" };
+    private String[] landLord1 = { "Prabin", "Kathmandu", "9841265446", "5000" };
     private String[] tenant1 = { "Prabin", "20", "9841265446", "Passport", "Dhading", "2003-11-17" };
 
     private String adminUsername = "admin";
@@ -90,9 +90,9 @@ public class Admin extends SystemUser {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name: ");
         String name = scanner.next();
-        for (int i = 0; i < this.landLordInfo.size(); i++) {
-            if (landLordInfo.get(i)[0].equals(name)) {
-                landLordInfo.remove(i);
+        for (String[] value : this.landLordInfo) {
+            if (value[0].equals(name)) {
+                landLordInfo.remove(value);
                 return 0;
             }
         }
@@ -122,9 +122,9 @@ public class Admin extends SystemUser {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name: ");
         String name = scanner.next();
-        for (int i = 0; i < tenantInfo.size(); i++) {
-            if (tenantInfo.get(i)[0].equals(name)) {
-                tenantInfo.remove(i);
+        for (String[] value : tenantInfo) {
+            if (value[0].equals(name)) {
+                tenantInfo.remove(value);
                 return 0;
             }
         }
@@ -135,12 +135,12 @@ public class Admin extends SystemUser {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name: ");
         String name = scanner.next();
-        for (int i = 0; i < this.landLordInfo.size(); i++) {
-            if (landLordInfo.get(i)[0].equals(name)) {
+        for (String[] value : this.landLordInfo) {
+            if (value[0].equals(name)) {
                 System.out.printf("\nThe name of the landlord: %s\n", name);
-                System.out.printf("The properties of landlord : %s\n", landLordInfo.get(i)[1]);
-                System.out.printf("The contact number of landlord : %s\n", landLordInfo.get(i)[2]);
-                System.out.printf("The rental charge of the landlord : %s\n", landLordInfo.get(i)[3]);
+                System.out.printf("The properties of landlord : %s\n", value[1]);
+                System.out.printf("The contact number of landlord : %s\n", value[2]);
+                System.out.printf("The rental charge of the landlord : %s\n", value[3]);
                 return 0;
             }
         }
