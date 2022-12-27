@@ -66,22 +66,22 @@ public class FamilyTypeTenant extends Tenant {
 
     @Override
     public void leaveRentedRoom() {
-
+        System.out.println("I want to leave the rented room.");
     }
 
     @Override
     public void requestEmergencyPayment() {
-
+        System.out.println("I request the emergency payment.");
     }
 
     @Override
     public void reviewLandlordBehavior() {
-
+        System.out.println("The landlord behaviour is printed.");
     }
 
     @Override
     public void reviewRentalProperty() {
-
+        System.out.println("The Rental Property details is printed.");
     }
 
 }
