@@ -67,22 +67,22 @@ public class StudentTypeTenant extends Tenant {
 
     @Override
     public void leaveRentedRoom() {
-
+        System.out.println("I want to leave the rented rooom.");
     }
 
     @Override
     public void requestEmergencyPayment() {
-
+        System.out.println("I request the emergency payment.");
     }
 
     @Override
     public void reviewLandlordBehavior() {
-
+        System.out.println("Landlord review is printed.");
     }
 
     @Override
     public void reviewRentalProperty() {
-
+        System.out.println("The rental property is printed.");
     }
 
 }
