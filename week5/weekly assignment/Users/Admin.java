@@ -10,12 +10,13 @@ public class Admin extends SystemUser {
     private ArrayList<String[]> landLordInfo = new ArrayList<>();
     private ArrayList<String[]> tenantInfo = new ArrayList<>();
 
-    // initial information
-    private String[] landLord1 = { "Prabin", "Kathmandu", "9841265446", "5000" };
-    private String[] tenant1 = { "Prabin", "20", "9841265446", "Passport", "Dhading", "2003-11-17" };
+    // dummy data for initial information
+    private String[] landLord = { "Prabin", "Kathmandu", "9841265446", "5000" };
+    private String[] tenant = { "Prabin", "20", "9841265446", "Citizenship", "Dhading", "2003-11-17" };
 
-    private String adminUsername = "admin";
-    private String adminPassword = "admin123";
+    //login username and password
+    private String username = "admin";
+    private String password = "admin123";
 
     public Admin() {
         login();
@@ -23,14 +24,14 @@ public class Admin extends SystemUser {
 
     @Override
     public void login() {
-        landLordInfo.add(this.landLord1);
-        tenantInfo.add(this.tenant1);
+        landLordInfo.add(this.landLord);
+        tenantInfo.add(this.tenant);
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the username : ");
         String username = scanner.next();
         System.out.println("Enter the password : ");
         String password = scanner.next();
-        if (this.adminUsername.equals(username) && this.adminPassword.equals(password)) {
+        if (this.username.equals(username) && this.password.equals(password)) {
             System.out.println("!!! Login Successful !!!\n");
             System.out.println(
                     "The commands for this system are :\n1- Add Landlord\n2- Add Tenant\n3- Delete Landlord\n4- Delete Tenant\n5- Generate Landlord Report\n6- Logout");
@@ -101,6 +102,7 @@ public class Admin extends SystemUser {
 
     public void addTenant() {
         Scanner scanner = new Scanner(System.in);
+        //data to add about tenant
         System.out.println("Name: ");
         String name = scanner.next();
         System.out.println("Age: ");
@@ -113,13 +115,13 @@ public class Admin extends SystemUser {
         String address = scanner.next();
         System.out.println("Date of Birth: ");
         String dob = scanner.next();
-        int length = this.tenantInfo.size();
         String[] info = { name, age, mobileNumber, identityProof, address, dob };
         tenantInfo.add(info);
     }
 
     public int deleteTenant() {
         Scanner scanner = new Scanner(System.in);
+        //search tenant by name and delete information.
         System.out.println("Name: ");
         String name = scanner.next();
         for (String[] value : tenantInfo) {
@@ -128,9 +130,11 @@ public class Admin extends SystemUser {
                 return 0;
             }
         }
+        //exception when tenant is not found.
         throw new TenantNotFoundException();
     }
 
+    //generate a detail report of a landlord printed of a particular landlord by name.
     public int generateReport() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name: ");
@@ -144,6 +148,7 @@ public class Admin extends SystemUser {
                 return 0;
             }
         }
+        //exception when landlord is not found
         throw new LandlordNotFoundException();
     }
 }
