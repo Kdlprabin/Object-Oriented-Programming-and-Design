@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class StudentTypeTenant extends Tenant {
     public String username = "tenant";
     public String password = "tenant123";
+    private String[] landLords = { "Prabin", "Pradeep", "Bishnu" };
+    private String myLandlord = "Prabin";
 
     public StudentTypeTenant() {
         login();
@@ -12,12 +14,18 @@ public class StudentTypeTenant extends Tenant {
 
     @Override
     public void viewLandlord() {
-
+        System.out.println("Landlord Name : " + this.myLandlord);
     }
 
     @Override
     public void selectLandlord() {
+        System.out.println("The list of landlord to choose from : \n");
+        for (String landlord : landLords) {
+            System.out.println(landlord);
+        }
+        Scanner scanner = new Scanner(System.in);
 
+        this.myLandlord = scanner.next();
     }
 
     @Override
@@ -72,12 +80,14 @@ public class StudentTypeTenant extends Tenant {
 
     @Override
     public void requestEmergencyPayment() {
-        System.out.println("I request the emergency payment.");
+        Scanner scanner = new Scanner(System.in);
+        int amount = scanner.nextInt();
+        System.out.println("I request the emergency payment amount of : "+amount);
     }
 
     @Override
     public void reviewLandlordBehavior() {
-        System.out.println("Landlord review is printed.");
+        System.out.println("Landlord behavior of "+myLandlord+" is printed.");
     }
 
     @Override
