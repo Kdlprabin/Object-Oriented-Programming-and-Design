@@ -1,20 +1,21 @@
 package Users;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import Exception.LandlordNotFoundException;
 import Exception.TenantNotFoundException;
 
 public class Admin extends SystemUser {
 
-    private ArrayList<String[]> landLordInfo = new ArrayList<>();
-    private ArrayList<String[]> tenantInfo = new ArrayList<>();
+    private HashMap<String, String[]> landLordInfo = new HashMap();
+    private HashMap<String, String[]> tenantInfo = new HashMap<>();
 
     // dummy data for initial information
     private String[] landLord = { "Prabin", "Kathmandu", "9841265446", "5000" };
     private String[] tenant = { "Prabin", "20", "9841265446", "Citizenship", "Dhading", "2003-11-17" };
 
-    //login username and password
+    // login username and password
     private String username = "admin";
     private String password = "admin123";
 
@@ -24,8 +25,8 @@ public class Admin extends SystemUser {
 
     @Override
     public void login() {
-        landLordInfo.add(this.landLord);
-        tenantInfo.add(this.tenant);
+        landLordInfo.put("Prabin", this.landLord);
+        tenantInfo.put("Prabin", this.tenant);
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the username : ");
         String username = scanner.next();
@@ -84,16 +85,17 @@ public class Admin extends SystemUser {
         System.out.println("Rental Charge: ");
         String rentalCharge = scanner.next();
         String[] info = { name, property, contact, rentalCharge };
-        landLordInfo.add(info);
+        landLordInfo.put(name,info);
     }
 
     public int deleteLandLord() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name: ");
         String name = scanner.next();
-        for (String[] value : this.landLordInfo) {
-            if (value[0].equals(name)) {
-                landLordInfo.remove(value);
+        String[] info = landLordInfo.get(name);
+        for (int i = 0; i < info.length; i++) {
+            if (info[0].equals(name)) {
+                landLordInfo.remove(name);
                 return 0;
             }
         }
@@ -102,7 +104,7 @@ public class Admin extends SystemUser {
 
     public void addTenant() {
         Scanner scanner = new Scanner(System.in);
-        //data to add about tenant
+        // data to add about tenant
         System.out.println("Name: ");
         String name = scanner.next();
         System.out.println("Age: ");
@@ -116,39 +118,42 @@ public class Admin extends SystemUser {
         System.out.println("Date of Birth: ");
         String dob = scanner.next();
         String[] info = { name, age, mobileNumber, identityProof, address, dob };
-        tenantInfo.add(info);
+        tenantInfo.put(name,info);
     }
 
     public int deleteTenant() {
         Scanner scanner = new Scanner(System.in);
-        //search tenant by name and delete information.
+        // search tenant by name and delete information.
         System.out.println("Name: ");
         String name = scanner.next();
-        for (String[] value : tenantInfo) {
-            if (value[0].equals(name)) {
-                tenantInfo.remove(value);
+        String[] info = tenantInfo.get(name);
+        for (int i = 0; i <info.length; i++) {
+            if (info[0].equals(name)) {
+                tenantInfo.remove(name);
                 return 0;
             }
         }
-        //exception when tenant is not found.
+        // exception when tenant is not found.
         throw new TenantNotFoundException();
     }
 
-    //generate a detail report of a landlord printed of a particular landlord by name.
+    // generate a detail report of a landlord printed of a particular landlord by
+    // name.
     public int generateReport() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Name: ");
         String name = scanner.next();
-        for (String[] value : this.landLordInfo) {
-            if (value[0].equals(name)) {
+        String[] info = landLordInfo.get(name);
+        for (int i = 0; i < info.length; i++) {
+            if (info[0].equals(name)) {
                 System.out.printf("\nThe name of the landlord: %s\n", name);
-                System.out.printf("The properties of landlord : %s\n", value[1]);
-                System.out.printf("The contact number of landlord : %s\n", value[2]);
-                System.out.printf("The rental charge of the landlord : %s\n", value[3]);
+                System.out.printf("The properties of landlord : %s\n", info[1]);
+                System.out.printf("The contact number of landlord : %s\n", info[2]);
+                System.out.printf("The rental charge of the landlord : %s\n", info[3]);
                 return 0;
             }
         }
-        //exception when landlord is not found
+        // exception when landlord is not found
         throw new LandlordNotFoundException();
     }
 }
