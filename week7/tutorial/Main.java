@@ -1,8 +1,11 @@
 public class Main {
     public static void main(String[] args) {
-        PrabinList list = new PrabinList();
-        list.insertFirst(10);
-        list.insertFirst(15);
-        list.display();
+        Queue queue = new Queue();
+        queue.enqueue(5);
+        queue.enqueue(4);
+        queue.enqueue(3);
+        queue.display();
+        queue.dequeue();
+        queue.display();
     }
 }
