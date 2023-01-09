@@ -13,7 +13,12 @@ public class Banking {
     private HashMap<String, Float> data = new HashMap<>();
 
     public Banking(String name) {
-        System.out.println(name);
+        System.out.println("\nWelcome to "+name+"!!!\n");
+        choices.add("createAccount");
+        choices.add("depositAmount");
+        choices.add("withdrawAmount");
+        choices.add("checkBalance");
+        choices.add("quit");
     }
 
     void createAccount(String name, float amount) {
@@ -66,7 +71,7 @@ public class Banking {
         return data.get(name);
     }
 
-    void quitProgram() {
+    private void quitProgram() {
         System.out.println("Exiting.....");
     }
 
@@ -74,7 +79,34 @@ public class Banking {
         Scanner scanner = new Scanner(System.in);
         switch (command) {
             case "createAccount":
-                createAccount(scanner.next(), scanner.nextFloat());
+                System.out.println("Enter the name: ");
+                this.name = scanner.next();
+                System.out.println("Enter the amount: ");
+                this.amount = scanner.nextFloat();
+                createAccount(name,amount);
+                break;
+            case "depositAmount":
+                System.out.println("Enter the name: ");
+                String holderName = scanner.next();
+                System.out.println("Enter the amount: ");
+                float depositAmount = scanner.nextFloat();
+                depositAmount(holderName, depositAmount);
+                break;
+            case "withdrawAmount":
+                System.out.println("Enter the name: ");
+                String withdrawName  = scanner.next();
+                System.out.println("Enter the amount: ");
+                float withdrawAmount = scanner.nextFloat();
+                withdrawAmount(withdrawName, withdrawAmount);
+                break;
+            case "checkBalance":
+                System.out.println("Enter the name: ");
+                checkBalance(scanner.next());
+                break;
+            case "quit":
+                quitProgram();
+                break;
+            default:
                 break;
         }
     }
