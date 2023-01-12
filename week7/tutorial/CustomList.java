@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 //custom linkedList from scratch
-public class PrabinList {
+public class CustomList {
     Node head;
     Node tail;
     int size;

@@ -10,11 +10,9 @@ public class BankingTransaction {
         Scanner scanner = new Scanner(System.in);
         System.out.println("These are the commands for this system.");
 
-        //fetching the command lists
         for(int i = 0; i <5; i++){
             System.out.println(i+1 + "- "+ banking.choices.get(i));
         }
-        //taking user input from the user
         while(command != 5){
             System.out.println("Enter the command number: ");
             command = scanner.nextInt()-1;
