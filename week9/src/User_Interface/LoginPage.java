@@ -12,6 +12,7 @@ public class LoginPage extends JFrame{
     private JButton loginButton;
     private JButton signupButton;
     private JPanel LoginPage;
+    private JLabel errorPasswordMsg;
 
     private void signUpFunction(){
         signupButton.addActionListener(e ->{
@@ -20,23 +21,27 @@ public class LoginPage extends JFrame{
         });
     }
     private boolean checkUser(String name, String password){
-        if(name.equals("Prabin") & password.equals("krishu")){
+        if(name.equals("Prabin") & password.equals("")){
             return true;
         }
+
         return false;
     }
+    private String getUserName(){
+        return enterYourUsernameTextField.getText();
+    }
     private void LoginFunction(){
-        String username = enterYourUsernameTextField.getText();
+        errorPasswordMsg.setVisible(false);
         char[] password = enterYourPasswordPasswordField.getPassword();
         System.out.println(password);
         loginButton.addActionListener(e->{
-            System.out.println(password);
-//            if(checkUser(username,password)){
-//                new Welcome();
-//                setVisible(false);
-//                return;
-//            }
-            new ErrorPage();
+            if(checkUser(getUserName(), "")){
+                new Welcome(getUserName());
+                setVisible(false);
+                return;
+            }
+            errorPasswordMsg.setRequestFocusEnabled(true);
+            errorPasswordMsg.setVisible(true);
         });
     }
 
