@@ -5,36 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b92d95b-a29f-421b-9ca5-8aaaa790f2b5" name="Changes" comment="gui form">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/Main$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/User_Interface/ErrorPage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/User_Interface/LoginPage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/User_Interface/SignupPage.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/User_Interface/Welcome.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/com/intellij/uiDesigner/core/AbstractLayout.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/com/intellij/uiDesigner/core/DimensionInfo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/com/intellij/uiDesigner/core/GridConstraints.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/com/intellij/uiDesigner/core/GridLayoutManager.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/com/intellij/uiDesigner/core/HorizontalInfo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/com/intellij/uiDesigner/core/LayoutState.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/com/intellij/uiDesigner/core/Spacer.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/com/intellij/uiDesigner/core/SupportCode.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/com/intellij/uiDesigner/core/Util.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/week9/com/intellij/uiDesigner/core/VerticalInfo.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User_Interface/ErrorPage.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User_Interface/ErrorPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User_Interface/LoginPage.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User_Interface/LoginPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User_Interface/SignupPage.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User_Interface/SignupPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User_Interface/Welcome.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/User_Interface/Welcome.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/User_Interface/Courses.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/User_Interface/Courses.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/User_Interface/Info.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/User_Interface/Info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/week9/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/week9/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HomePage.form" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HomePage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/week9/User_Interface/LoginPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/week9/User_Interface/LoginPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/week9/User_Interface/Welcome.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/week9/User_Interface/Welcome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User_Interface/LoginPage.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/User_Interface/LoginPage.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User_Interface/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User_Interface/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User_Interface/Welcome.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/User_Interface/Welcome.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/User_Interface/Welcome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/User_Interface/Welcome.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,15 +40,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH&quot;: &quot;11&quot;,
-    &quot;UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH&quot;: &quot;508&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "UI_DESIGNER_EDITOR_MODE.PaletteManager.WIDTH": "1",
+    "UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH": "459"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -113,6 +94,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="gui form" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/week9$Main.ic" NAME="Main Coverage Results" MODIFIED="1673516943310" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/week9$Main.ic" NAME="Main Coverage Results" MODIFIED="1673587331313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
