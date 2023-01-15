@@ -1,5 +1,17 @@
+import UI.LoginPage;
+
 public class Main {
+
+    static void createAndShowGUI(){
+        LoginPage loginPage = new LoginPage();
+    }
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                createAndShowGUI();
+            }
+        });
+
     }
 }
