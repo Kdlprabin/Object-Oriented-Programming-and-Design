@@ -14,6 +14,8 @@ public class LoginPage extends JFrame{
     private JTextField emailField;
     private JButton loginButton;
     private JTextField passwordField;
+    private JLabel emailInvalid;
+    private JLabel passwordInvalid;
 
     private static void addPlaceholder(JTextField textField, String message){
         textField.addFocusListener(new FocusListener() {
@@ -34,6 +36,7 @@ public class LoginPage extends JFrame{
         if(validate.validatePassword(password)){
             return true;
         };
+        passwordInvalid.setVisible(true);
         return false;
     }
     private boolean checkEmail(){
@@ -41,12 +44,13 @@ public class LoginPage extends JFrame{
         if(validate.validateEmail(email)){
             return true;
         }
+        emailInvalid.setVisible(true);
         return false;
     }
 
     private void loginHandler(){
         loginButton.addActionListener(e->{
-            if(checkEmail() & checkEmail()){
+            if(checkEmail() & checkPassword()){
                 new HomePage();
                 setVisible(false);
             };
