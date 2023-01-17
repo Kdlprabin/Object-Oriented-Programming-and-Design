@@ -3,7 +3,6 @@ package UI;
 import Backend.Validate;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -12,10 +11,11 @@ public class LoginPage extends JFrame{
     private JPanel LoginPage;
     private JPanel Content;
     private JTextField emailField;
-    private JButton loginButton;
+    private JButton signupButton;
     private JTextField passwordField;
     private JLabel emailInvalid;
     private JLabel passwordInvalid;
+    private JButton loginButton;
 
     private static void addPlaceholder(JTextField textField, String message){
         textField.addFocusListener(new FocusListener() {
@@ -32,22 +32,21 @@ public class LoginPage extends JFrame{
         });
     }
     private boolean checkPassword(){
-        String password = passwordField.getText();
-        if(validate.validatePassword(password)){
+        String password = "Chitwannepal#4";
+        if(password.equals(passwordField.getText())){
             return true;
-        };
+        }
         passwordInvalid.setVisible(true);
         return false;
     }
     private boolean checkEmail(){
-        String email = emailField.getText();
-        if(validate.validateEmail(email)){
+        String email = "prabinkandel@gmail.com";
+        if(email.equals(emailField.getText())){
             return true;
         }
         emailInvalid.setVisible(true);
         return false;
     }
-
     private void loginHandler(){
         loginButton.addActionListener(e->{
             if(checkEmail() & checkPassword()){
@@ -56,13 +55,20 @@ public class LoginPage extends JFrame{
             };
         });
     }
+    public void signupHandler(){
+        signupButton.addActionListener(e->{
+            new SignupPage();
+            setVisible(false);
+        });
+    }
     public LoginPage(){
         setContentPane(LoginPage);
         setSize(1280,832);
         addPlaceholder(emailField,"@ Enter your email");
         addPlaceholder(passwordField,"# Enter your password");
         loginHandler();
-        setUndecorated(true);
+        signupHandler();
+//        setUndecorated(true);
         setVisible(true);
     }
 }

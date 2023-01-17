@@ -1,10 +1,7 @@
-import UI.LoginPage;
-import UI.SignupPage;
-
 public class Main {
 
-    static void createAndShowGUI(){
-        LoginPage loginPage = new LoginPage();
+    private static void createAndShowGUI(){
+        HomePage homePage = new HomePage();
     }
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -13,6 +10,5 @@ public class Main {
                 createAndShowGUI();
             }
         });
-
     }
 }
