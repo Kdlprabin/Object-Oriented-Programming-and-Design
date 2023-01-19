@@ -11,15 +11,16 @@ public class SignupPage extends JFrame{
     private JPanel LoginPage;
     private JPanel Content;
     private JTextField emailField;
-    private JButton backButton;
     private JTextField passwordField;
     private JTextField UsernameField;
-    private JTextField confirmPasswordField;
     private JButton registerButton;
     private JLabel invalidUsername;
     private JLabel invalidEmail;
     private JLabel invalidPassword;
     private JLabel passwordNotMatch;
+    private JButton loginButton;
+    private JButton studentButton;
+    private JButton teacherButton;
 
     private static void addPlaceholder(JTextField textField, String message){
         textField.addFocusListener(new FocusListener() {
@@ -51,13 +52,6 @@ public class SignupPage extends JFrame{
         invalidPassword.setVisible(true);
         return false;
     }
-    private boolean checkConfirmPassword(){
-        if(passwordField.getText() == confirmPasswordField.getText()){
-            return true;
-        }
-        passwordNotMatch.setVisible(true);
-        return false;
-    }
     private boolean checkEmail(){
         String email = emailField.getText();
         if(validate.validateEmail(email)){
@@ -69,14 +63,14 @@ public class SignupPage extends JFrame{
 
     private void registerHandler(){
         registerButton.addActionListener(e->{
-            if(checkUsername() & checkEmail() & checkPassword() & checkConfirmPassword()){
+            if(checkUsername() & checkEmail() & checkPassword()){
                 new HomePage();
                 setVisible(false);
             };
         });
     }
     private void returnHandler(){
-        backButton.addActionListener(e->{
+        loginButton.addActionListener(e->{
             new LoginPage();
             setVisible(false);
         });
@@ -87,7 +81,6 @@ public class SignupPage extends JFrame{
         addPlaceholder(UsernameField,"& Enter a username");
         addPlaceholder(emailField,"@ Enter your email");
         addPlaceholder(passwordField,"# Enter your password");
-        addPlaceholder(confirmPasswordField,"# Re-enter your password");
         registerHandler();
         returnHandler();
 //        setUndecorated(true);
