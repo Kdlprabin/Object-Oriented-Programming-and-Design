@@ -1,10 +1,13 @@
 package UI;
 
 import Backend.Validate;
+import Data.Database;
 
 import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.Connection;
+import java.sql.Statement;
 
 public class LoginPage extends JFrame{
     Validate validate = new Validate();
@@ -16,6 +19,7 @@ public class LoginPage extends JFrame{
     private JLabel emailInvalid;
     private JLabel passwordInvalid;
     private JButton loginButton;
+
 
     private static void addPlaceholder(JTextField textField, String message){
         textField.addFocusListener(new FocusListener() {
@@ -33,6 +37,7 @@ public class LoginPage extends JFrame{
     }
     private boolean checkPassword(){
         String password = "Chitwannepal#4";
+
         if(password.equals(passwordField.getText())){
             return true;
         }
@@ -62,6 +67,7 @@ public class LoginPage extends JFrame{
         });
     }
     public LoginPage(){
+
         setContentPane(LoginPage);
         setSize(1280,832);
         addPlaceholder(emailField,"@ Enter your email");
