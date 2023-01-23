@@ -1,13 +1,11 @@
 package Database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class CheckConnection{
-
-    void check(){
-            String url = "jdbc:mysql://localhost?useSSL=false";
+public class CreateConnection{
+    Connection con;
+    public CreateConnection(){
+            String url = "jdbc:mysql://localhost/week10";
             String username = "root";
             String password = "Chitwannepal#4";
         //loading driver
@@ -16,9 +14,10 @@ public class CheckConnection{
             Connection connection= DriverManager.getConnection(url,username,password);
             if(!connection.isClosed()){
                 System.out.println("Connection is opened");
+                this.con = connection;
+            }else {
+                System.out.println("connection failed");
             }
-            System.out.println("connection failed");
-            connection.close();
         }
         catch(ClassNotFoundException e){
             System.out.println(e);
@@ -26,9 +25,5 @@ public class CheckConnection{
         catch (SQLException e){
             System.out.println(e);
         }
-    }
-    public static void main(String[] args) {
-        CheckConnection checkConnection = new CheckConnection();
-        checkConnection.check();
     }
 }
