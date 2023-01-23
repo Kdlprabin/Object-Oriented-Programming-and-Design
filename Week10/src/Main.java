@@ -1,15 +1,22 @@
 import Database.CreateConnection;
+import Database.CreateDatabase;
+import Database.SupplyData;
 import Frontend.Display;
-
-import java.sql.Connection;
 
 public class Main {
 
+    //to create and show GUI
     private static void createAndShowGUI(){
-        Display display = new Display();
+        try {
+            Display display = new Display();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
     public static void main(String[] args) {
-        CreateConnection connection = new CreateConnection();
+        new CreateDatabase();
+        new SupplyData();
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

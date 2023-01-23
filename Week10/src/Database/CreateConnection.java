@@ -3,11 +3,15 @@ package Database;
 import java.sql.*;
 
 public class CreateConnection{
-    Connection con;
+    public Connection con;
+
+    public void closeCon() throws SQLException {
+        this.con.close();
+    }
     public CreateConnection(){
-            String url = "jdbc:mysql://localhost/week10";
-            String username = "root";
-            String password = "Chitwannepal#4";
+        String url = "jdbc:mysql://localhost/week10";
+        String username = "root";
+        String password = "Chitwannepal#4";
         //loading driver
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -15,6 +19,7 @@ public class CreateConnection{
             if(!connection.isClosed()){
                 System.out.println("Connection is opened");
                 this.con = connection;
+
             }else {
                 System.out.println("connection failed");
             }
