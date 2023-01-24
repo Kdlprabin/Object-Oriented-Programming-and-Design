@@ -2,15 +2,17 @@ package UI;
 
 import Backend.Validate;
 import Data.Database;
+import Data.FetchData;
 
 import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.HashMap;
 
 public class LoginPage extends JFrame{
-    Validate validate = new Validate();
+    FetchData fetchData = new FetchData();
     private JPanel LoginPage;
     private JPanel Content;
     private JTextField emailField;
@@ -35,29 +37,24 @@ public class LoginPage extends JFrame{
             }
         });
     }
-    private boolean checkPassword(){
-        String password = "Chitwannepal#4";
-
-        if(password.equals(passwordField.getText())){
-            return true;
-        }
-        passwordInvalid.setVisible(true);
-        return false;
-    }
-    private boolean checkEmail(){
-        String email = "prabinkandel@gmail.com";
-        if(email.equals(emailField.getText())){
-            return true;
-        }
-        emailInvalid.setVisible(true);
-        return false;
-    }
     private void loginHandler(){
         loginButton.addActionListener(e->{
-            if(checkEmail() & checkPassword()){
-                new HomePage();
-                setVisible(false);
-            };
+                String username = emailField.getText();
+                String password = passwordField.getText();
+                HashMap<String, String> loginInfo = fetchData.loginData(username);
+                if(loginInfo.get("password") == null){
+                    passwordInvalid.setVisible(true);
+                    return;
+                }
+                if (loginInfo.get("password").equals(password)) {
+                    new HomePage();
+                    setVisible(false);
+                }else{
+                    passwordInvalid.setVisible(true);
+                }
+                if (username.contains(" ")) {
+                    emailInvalid.setVisible(true);
+                }
         });
     }
     public void signupHandler(){
@@ -74,7 +71,6 @@ public class LoginPage extends JFrame{
         addPlaceholder(passwordField,"# Enter your password");
         loginHandler();
         signupHandler();
-//        setUndecorated(true);
         setVisible(true);
     }
 }

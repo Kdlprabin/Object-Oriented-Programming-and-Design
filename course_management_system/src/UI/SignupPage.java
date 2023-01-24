@@ -1,8 +1,10 @@
 package UI;
 
 import Backend.Validate;
+import Data.SignupData;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
@@ -21,6 +23,8 @@ public class SignupPage extends JFrame{
     private JButton loginButton;
     private JButton studentButton;
     private JButton teacherButton;
+    private SignupData data;
+    private String role;
 
     private static void addPlaceholder(JTextField textField, String message){
         textField.addFocusListener(new FocusListener() {
@@ -36,37 +40,29 @@ public class SignupPage extends JFrame{
             }
         });
     }
-    private boolean checkUsername(){
-        String Username = UsernameField.getText();
-        if(Username.length() > 20){
-            return true;
-        }
-        invalidUsername.setVisible(true);
-        return false;
-    }
-    private boolean checkPassword(){
-        String password = passwordField.getText();
-        if(validate.validatePassword(password)){
-            return true;
-        };
-        invalidPassword.setVisible(true);
-        return false;
-    }
-    private boolean checkEmail(){
-        String email = emailField.getText();
-        if(validate.validateEmail(email)){
-            return true;
-        }
-        invalidEmail.setVisible(true);
-        return false;
-    }
 
+    private boolean validateAll(){
+        String username = UsernameField.getText();
+        String email = emailField.getText();
+        String password = passwordField.getText();
+        String role = this.role;
+        if(validate.validateEmail(email) & validate.validateUsername(username) & validate.validatePassword(password) & role != null){
+            return true;
+        }
+        if(validate.validateEmail(email)){
+            invalidEmail.setVisible(true);
+        }
+        if(validate.validatePassword(password)){
+            invalidPassword.setVisible(true);
+        }
+        if(validate.validateUsername(username)){
+            invalidUsername.setVisible(true);
+        }
+        return false;
+    }
     private void registerHandler(){
         registerButton.addActionListener(e->{
-            if(checkUsername() & checkEmail() & checkPassword()){
-                new HomePage();
-                setVisible(false);
-            };
+
         });
     }
     private void returnHandler(){
@@ -75,12 +71,25 @@ public class SignupPage extends JFrame{
             setVisible(false);
         });
     }
+    private void roleChanger(){
+        studentButton.addActionListener(e->{
+            this.role = "Student";
+            teacherButton.setBackground(Color.white);
+            studentButton.setBackground(Color.CYAN);
+        });
+        teacherButton.addActionListener(e->{
+            this.role = "Teacher";
+            teacherButton.setBackground(Color.CYAN);
+            studentButton.setBackground(Color.white);
+        });
+    }
     public SignupPage(){
         setContentPane(LoginPage);
         setSize(1280,832);
         addPlaceholder(UsernameField,"& Enter a username");
         addPlaceholder(emailField,"@ Enter your email");
         addPlaceholder(passwordField,"# Enter your password");
+        roleChanger();
         registerHandler();
         returnHandler();
 //        setUndecorated(true);
