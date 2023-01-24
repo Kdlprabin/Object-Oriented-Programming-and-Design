@@ -80,7 +80,7 @@
                 </constraints>
                 <properties>
                   <foreground color="-912868"/>
-                  <text value="Email does not match"/>
+                  <text value="Email not in proper format"/>
                   <visible value="false"/>
                 </properties>
               </component>
@@ -90,7 +90,7 @@
                 </constraints>
                 <properties>
                   <foreground color="-912868"/>
-                  <text value="Password does not match"/>
+                  <text value="Invalid details "/>
                   <visible value="false"/>
                 </properties>
               </component>

@@ -5,6 +5,13 @@ import java.util.regex.Pattern;
 
 public class Validate {
 
+    public boolean validateUsername(String username){
+        if(username.length() > 5& !username.contains(" ")){
+            return true;
+        }
+        return false;
+    }
+
     //validate email
     public boolean validateEmail(String email){
 
@@ -12,9 +19,9 @@ public class Validate {
         String patternEmailString = "^[a-z0-9._%+-]+@heraldcollege.edu.np$";
         if(Pattern.matches(patternEmailString, email)){
             return true;
-        }else{
-            return false;
         }
+        return false;
+
     }
 
     //validate password
@@ -24,9 +31,8 @@ public class Validate {
         String patternPasswordString = "^.*(?=.{10,})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$";
         if(Pattern.matches(patternPasswordString, password)){
             return true;
-        }else{
-            return false;
         }
+            return false;
     }
 }
 
