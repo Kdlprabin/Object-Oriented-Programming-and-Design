@@ -14,9 +14,8 @@ public class Validate {
 
     //validate email
     public boolean validateEmail(String email){
-
         //email validation pattern
-        String patternEmailString = "^[a-z0-9._%+-]+@heraldcollege.edu.np$";
+        String patternEmailString = "^[a-z0-9._%+-]+@gmail.com$";
         if(Pattern.matches(patternEmailString, email)){
             return true;
         }
@@ -26,9 +25,8 @@ public class Validate {
 
     //validate password
     public boolean validatePassword(String password){
-
         //password validation pattern
-        String patternPasswordString = "^.*(?=.{10,})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$";
+        String patternPasswordString = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\\$%\\^&\\*]).{8,}$";
         if(Pattern.matches(patternPasswordString, password)){
             return true;
         }

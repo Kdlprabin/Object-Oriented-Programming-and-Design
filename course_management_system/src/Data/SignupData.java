@@ -1,24 +1,22 @@
 package Data;
 
-import java.util.HashMap;
-
 public class SignupData {
-    String username= null;
-    String email = null;
-    String password = null;
-    String role = null;
+    public String username= null;
+    public String email = null;
+    public String password = null;
+    public String role = null;
 
-
-    public void addUsername(String username){
+    public SignupData(String username, String email,String role, String password){
+        this.role = role;
         this.username = username;
-    }
-    public void addPassword(String password){
+        this.email = email;
         this.password = password;
     }
-    public void addEmail(String email){
-        this.email = email;
-    }public void addRole(String role){
+    public void addData(String username,String email,String role,String password){
         this.role = role;
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
 }
