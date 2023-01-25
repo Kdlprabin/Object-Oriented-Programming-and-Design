@@ -12,7 +12,7 @@ public class FetchData {
     public HashMap<String,String> loginData(String username){
         try{
             Statement st = connection.createStatement();
-            String statement = "SELECT * FROM adminInfo WHERE username='"+username+"';";
+            String statement = "SELECT * FROM USERS_LOGIN_DATA WHERE username='"+username+"';";
             ResultSet res = st.executeQuery(statement);
             while(res.next()){
                 loginInfo.put("password",res.getString("password"));

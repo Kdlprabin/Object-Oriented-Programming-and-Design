@@ -1,12 +1,17 @@
 package UI;
 
+import Backend.Exceptions.UserExistsException;
 import Backend.Validate;
+import Data.SendData;
 import Data.SignupData;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.SQLException;
+
+import static java.lang.Thread.sleep;
 
 public class SignupPage extends JFrame{
     Validate validate = new Validate();
@@ -23,7 +28,10 @@ public class SignupPage extends JFrame{
     private JButton loginButton;
     private JButton studentButton;
     private JButton teacherButton;
-    private SignupData data;
+    private JLabel resultStat;
+    private String username;
+    private String password;
+    private String email;
     private String role;
 
     private static void addPlaceholder(JTextField textField, String message){
@@ -42,27 +50,47 @@ public class SignupPage extends JFrame{
     }
 
     private boolean validateAll(){
-        String username = UsernameField.getText();
-        String email = emailField.getText();
-        String password = passwordField.getText();
-        String role = this.role;
+        if(!validate.validateEmail(email)){
+            invalidEmail.setVisible(true);
+        }else{
+            invalidEmail.setVisible(false);
+        }
+        if(!validate.validatePassword(password)){
+            invalidPassword.setVisible(true);
+        }else{
+            invalidPassword.setVisible(false);
+        }
+        if(!validate.validateUsername(username)){
+            invalidUsername.setVisible(true);
+        }else{
+            invalidUsername.setVisible(false);
+        }
         if(validate.validateEmail(email) & validate.validateUsername(username) & validate.validatePassword(password) & role != null){
             return true;
-        }
-        if(validate.validateEmail(email)){
-            invalidEmail.setVisible(true);
-        }
-        if(validate.validatePassword(password)){
-            invalidPassword.setVisible(true);
-        }
-        if(validate.validateUsername(username)){
-            invalidUsername.setVisible(true);
         }
         return false;
     }
     private void registerHandler(){
         registerButton.addActionListener(e->{
-
+            this.username = UsernameField.getText();
+            this.email = emailField.getText();
+            this.password = passwordField.getText();
+            if(validateAll()){
+                SendData sendData = new SendData();
+                SignupData s = new SignupData(username,email,role,password);
+                try {
+                    sendData.signupData(s);
+                    resultStat.setText("Account creation successful");
+                    resultStat.setForeground(Color.green);
+                    resultStat.setVisible(true);
+                    setVisible(false);
+                    new LoginPage();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (UserExistsException exp){
+                    resultStat.setVisible(true);
+                }
+            }
         });
     }
     private void returnHandler(){
@@ -84,6 +112,7 @@ public class SignupPage extends JFrame{
         });
     }
     public SignupPage(){
+        resultStat.setVisible(false);
         setContentPane(LoginPage);
         setSize(1280,832);
         addPlaceholder(UsernameField,"& Enter a username");
