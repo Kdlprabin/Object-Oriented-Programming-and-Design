@@ -1,8 +1,6 @@
 import UI.LoginPage;
-import UI.SignupPage;
 
-import java.sql.Driver;
-import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Main {
 
