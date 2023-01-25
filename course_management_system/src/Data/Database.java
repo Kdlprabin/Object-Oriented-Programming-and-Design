@@ -1,25 +1,43 @@
 package Data;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Database {
 
-    private Connection loadDriver(String url, String username, String password) {
+    private Connection loadDriver(String url, String username, String password){
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, username, password);
             if (!connection.isClosed()) {
                 System.out.println("Connection successful");
+                Statement createTable = connection.createStatement();
+                createTable.executeUpdate("CREATE TABLE IF NOT EXISTS USERS_LOGIN_DATA(id int AUTO_INCREMENT PRIMARY KEY,role VARCHAR(10),username VARCHAR(20),email VARCHAR(30),password VARCHAR(15));");
             }
             return connection;
-        } catch (SQLException e) {
-            System.out.println(e);
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e) {
             System.out.println("Class was not found");
+        }catch(NullPointerException e){
+            createDatabase("jdbc:mysql://localhost/",username,password);
+        }catch(SQLException e){
+            createDatabase("jdbc:mysql://localhost/",username,password);
         }
         return null;
+    }
+    public void createDatabase(String url, String username,String password){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            if (!connection.isClosed()) {
+                System.out.println("Connection successful");
+                Statement st = connection.createStatement();
+                st.executeUpdate("CREATE DATABASE IF NOT EXISTS course_management_system;");
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }catch(ClassNotFoundException e){
+            System.out.println(e);
+        }
     }
     public Connection connectToDatabase(){
         String url = "jdbc:mysql://localhost/course_management_system";
