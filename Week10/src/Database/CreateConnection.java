@@ -25,10 +25,10 @@ public class CreateConnection{
             }
         }
         catch(ClassNotFoundException e){
-            System.out.println(e);
+            System.out.println("Class was not found");
         }
         catch (SQLException e){
-            System.out.println(e);
+            System.out.println("Sql exception");
         }
     }
 }

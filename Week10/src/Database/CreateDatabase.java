@@ -12,7 +12,7 @@ public class CreateDatabase {
                 Statement st = connection.createStatement();
                 st.executeUpdate("CREATE DATABASE IF NOT EXISTS database_name;\n");
         }catch(SQLException e){
-            System.out.println(e);
+            System.out.println("SQL exception");
         }
     }
 }
