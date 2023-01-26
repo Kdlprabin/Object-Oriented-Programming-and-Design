@@ -3,8 +3,6 @@ package Frontend;
 import Database.CreateConnection;
 
 import javax.swing.*;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,16 +11,17 @@ import java.util.ArrayList;
 
 public class Display extends JFrame{
     private JPanel Display;
-    private JList list1;
-    private JList list2;
-    private JList list3;
-    private ArrayList<Integer> idList = new ArrayList<>();
-    private ArrayList<String> firstList = new ArrayList<>();
-    private ArrayList<String> lastList = new ArrayList<>();
+    private JList<Object> list1;
+    private JList<Object> list2;
+    private JList<Object> list3;
 
-    public Display(){
+
+    public Display() throws SQLException {
         CreateConnection connect = new CreateConnection();
         Connection connection = connect.con;
+        ArrayList<Integer> idList = new ArrayList<>();
+        ArrayList<String> firstList = new ArrayList<>();
+        ArrayList<String> lastList = new ArrayList<>();
         try{
             Statement St = connection.createStatement();
             ResultSet res = St.executeQuery("Select * from week10");
@@ -32,7 +31,7 @@ public class Display extends JFrame{
                 lastList.add(res.getString("Last_name"));
             }
         }catch(SQLException e){
-            System.out.println(e);
+            System.out.println("error in the program");
         }
         setContentPane(Display);
         setSize(530,300);
