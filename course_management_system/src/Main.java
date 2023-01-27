@@ -1,3 +1,4 @@
+import UI.HomePage;
 import UI.LoginPage;
 
 import java.sql.SQLException;
@@ -5,7 +6,7 @@ import java.sql.SQLException;
 public class Main {
 
     static void createAndShowGUI(){
-        LoginPage loginPage = new LoginPage();
+       new HomePage("Prabin");
     }
     public static void main(String[] args) {
                 javax.swing.SwingUtilities.invokeLater(new Runnable() {

@@ -47,7 +47,7 @@ public class LoginPage extends JFrame{
                     return;
                 }
                 if (loginInfo.get("password").equals(password)) {
-                    new HomePage();
+                    new HomePage(username);
                     setVisible(false);
                 }else{
                     passwordInvalid.setVisible(true);
