@@ -14,6 +14,7 @@ public class SendData {
     public void signupData(SignupData signupData) throws SQLException {
         Statement checkStatement = connection.createStatement();
         Statement st = connection.createStatement();
+        Statement st1 = connection.createStatement();
         ResultSet res = checkStatement.executeQuery("SELECT * FROM USERS_LOGIN_DATA");
         while (res.next()){
             String userStat = res.getString("username");
@@ -23,6 +24,7 @@ public class SendData {
         }
         try{
             st.executeUpdate("INSERT INTO USERS_LOGIN_DATA(role,username,email,password) VALUES('"+signupData.role+"','" + signupData.username + "','" + signupData.email + "','" + signupData.password + "');");
+            st1.executeUpdate("INSERT INTO STUDENT_INFO(studentName) VALUES('"+signupData.username+"');");
         }catch(Exception e){
             System.out.println(e);
         }

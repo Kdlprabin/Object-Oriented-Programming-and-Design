@@ -1,14 +1,10 @@
 package UI;
 
-import Backend.Validate;
-import Data.Database;
-import Data.FetchData;
 
+import Data.FetchData;
 import javax.swing.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.sql.Connection;
-import java.sql.Statement;
 import java.util.HashMap;
 
 public class LoginPage extends JFrame{

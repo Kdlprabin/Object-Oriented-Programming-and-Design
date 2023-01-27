@@ -15,12 +15,14 @@ public class Courses {
         ArrayList<String> List = new ArrayList<>();
         try {
             Statement st = connection.createStatement();
-            ResultSet res = st.executeQuery("SELECT * from COURSES_INFO");
+            ResultSet res = st.executeQuery("SELECT * from COURSES_INFO;");
             while (res.next()) {
                 List.add(res.getString("courseName"));
             }
         } catch (SQLException e) {
             System.out.println("SQL Exception");
+        }catch (NullPointerException E){
+            System.out.println("The database is empty");
         }
         return List;
     }
