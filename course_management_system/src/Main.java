@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class Main {
 
     static void createAndShowGUI(){
-       new LoginPage();
+       new HomePage("Admin");
     }
     public static void main(String[] args) {
                 javax.swing.SwingUtilities.invokeLater(new Runnable() {

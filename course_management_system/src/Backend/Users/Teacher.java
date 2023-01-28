@@ -40,4 +40,14 @@ public class Teacher {
         Statement addMarksSt = connection.createStatement();
         addMarksSt.executeUpdate("UPDATE ENROLLMENT SET obtainedMarks="+marks+" WHERE studentName='"+studentName+"';");
     }
+    public int getTeachersCount(){
+        int teacherCount = 0;
+        try{
+            Statement st = connection.createStatement();
+            ResultSet res = st.executeQuery("SELECT COUNT(*) FROM USERS_LOGIN_DATA WHERE role='Teacher';");
+        }catch (SQLException e){
+            System.out.println("SQL Exception");
+        }
+        return teacherCount;
+    }
 }
