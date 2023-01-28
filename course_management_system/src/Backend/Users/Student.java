@@ -16,9 +16,10 @@ public class Student extends Users {
     Connection connection = database.connectToDatabase();
     private String[] optionalModules;
 
-    Student(String username){
+    public Student(String username){
         this.username = username;
     }
+    public Student(){}
     private void chooseCourse(String courseName)throws SQLException {
         Statement chooseCourseSt = connection.createStatement();
         chooseCourseSt.executeUpdate("UPDATE STUDENT_INFO SET courseName='"+courseName+"' WHERE studentName='"+username+"';");
@@ -40,12 +41,14 @@ public class Student extends Users {
     }
     private void chooseOptionalModules(){}
 
-    public static void main(String[] args) throws SQLException {
-        Student student = new Student("Testing");
-        student.chooseCourse("BIT");
-        ArrayList<String> modules = new ArrayList<>();
-        modules.add("NMC");
-        modules.add("OOP");
-        student.enrollModules(modules);
+    public int getStudentsCount(){
+        int studentCount = 0;
+        try{
+            Statement st = connection.createStatement();
+            ResultSet res = st.executeQuery("SELECT COUNT(*) FROM USERS_LOGIN_DATA WHERE ROLE='Student';");
+        }catch (SQLException e){
+            System.out.println("SQL Exception");
+        }
+        return studentCount;
     }
 }

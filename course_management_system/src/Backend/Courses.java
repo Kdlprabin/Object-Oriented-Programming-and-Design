@@ -26,4 +26,15 @@ public class Courses {
         }
         return List;
     }
+    public int getCourseCount(){
+        int courseCount = 0;
+        try{
+            Statement st = connection.createStatement();
+            ResultSet res = st.executeQuery("SELECT COUNT(*) FROM COURSES_INFO;");
+        }catch (SQLException e){
+            System.out.println("SQL Exception");
+        }
+        return courseCount;
+    }
+
 }
