@@ -1,7 +1,6 @@
 package Backend.Users;
 
 import Data.Database;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +13,14 @@ public class Teacher {
     private ArrayList<String> modules;
     Database database = new Database();
     private Connection connection = database.connectToDatabase();
+
+    public Teacher(String username) {
+        this.username = username;
+    }
+    public String getUsername() {
+        return username;
+    }
+
     public ArrayList<String> viewModule()throws SQLException {
         ArrayList<String> modules = new ArrayList<>();
         Statement viewModuleSt = connection.createStatement();
@@ -39,15 +46,5 @@ public class Teacher {
     public void addMarks(String studentName,int marks)throws SQLException{
         Statement addMarksSt = connection.createStatement();
         addMarksSt.executeUpdate("UPDATE ENROLLMENT SET obtainedMarks="+marks+" WHERE studentName='"+studentName+"';");
-    }
-    public int getTeachersCount(){
-        int teacherCount = 0;
-        try{
-            Statement st = connection.createStatement();
-            ResultSet res = st.executeQuery("SELECT COUNT(*) FROM USERS_LOGIN_DATA WHERE role='Teacher';");
-        }catch (SQLException e){
-            System.out.println("SQL Exception");
-        }
-        return teacherCount;
     }
 }

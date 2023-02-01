@@ -1,6 +1,10 @@
 package UI;
 
 
+import Backend.CustomDatatype.UserData;
+import Backend.Users.Admin;
+import Backend.Users.Student;
+import Backend.Users.Teacher;
 import Data.FetchData;
 import javax.swing.*;
 import java.awt.event.FocusEvent;
@@ -17,7 +21,6 @@ public class LoginPage extends JFrame{
     private JLabel emailInvalid;
     private JLabel passwordInvalid;
     private JButton loginButton;
-
 
     private static void addPlaceholder(JTextField textField, String message){
         textField.addFocusListener(new FocusListener() {
@@ -43,7 +46,22 @@ public class LoginPage extends JFrame{
                     return;
                 }
                 if (loginInfo.get("password").equals(password)) {
-                    new HomePage(username);
+                    switch (loginInfo.get("role").toLowerCase()){
+                        case "student":
+                            Student student = new Student(username);
+                            new Homepage(student);
+                            break;
+                        case "teacher":
+                            Teacher teacher = new Teacher(username);
+                            new Homepage(teacher);
+                            break;
+                        case "admin":
+                            Admin admin = new Admin(username);
+                            new Homepage(admin);
+                            break;
+                        default:
+                            System.out.println(loginInfo.get("role"));
+                    }
                     setVisible(false);
                 }else{
                     passwordInvalid.setVisible(true);

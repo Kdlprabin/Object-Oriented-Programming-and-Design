@@ -17,19 +17,12 @@ public class FetchData {
             ResultSet res = st.executeQuery("SELECT * FROM USERS_LOGIN_DATA WHERE username='" + username + "';");
             while (res.next()) {
                 loginInfo.put("password", res.getString("password"));
-                System.out.println(res.getString("password"));
+                loginInfo.put("role",res.getString("role"));
             }
-            System.out.println(loginInfo);
             loginInfo.put("username", username);
         }catch(SQLException e){
             System.out.println("sql exception");
         }
         return loginInfo;
-    }
-
-    public static void main(String[] args) {
-        FetchData fetchData = new FetchData();
-        HashMap<String,String> info = fetchData.loginData("Testing");
-        System.out.println(info);
     }
 }

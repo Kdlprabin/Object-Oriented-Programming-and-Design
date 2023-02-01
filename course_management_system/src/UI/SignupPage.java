@@ -3,7 +3,7 @@ package UI;
 import Backend.Exceptions.UserExistsException;
 import Backend.Validate;
 import Data.SendData;
-import Data.SignupData;
+import Backend.CustomDatatype.SignupData;
 
 import javax.swing.*;
 import java.awt.*;
