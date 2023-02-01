@@ -1,4 +1,4 @@
-package Data;
+package Backend.CustomDatatype;
 
 public class SignupData {
     public String username= null;

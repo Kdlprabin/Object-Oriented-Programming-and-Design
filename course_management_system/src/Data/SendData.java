@@ -1,5 +1,6 @@
 package Data;
 
+import Backend.CustomDatatype.SignupData;
 import Backend.Exceptions.UserExistsException;
 
 import java.sql.ResultSet;
