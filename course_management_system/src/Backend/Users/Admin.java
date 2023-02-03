@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 
 
 public class Admin{
@@ -65,5 +66,31 @@ public class Admin{
     public void generateResult(String studentName) throws  SQLException{
         Statement generateResultSt = connection.createStatement();
         generateResultSt.executeUpdate("");
+    }
+    public HashMap<String, Integer> getCounts(){
+        String studentQuery = "SELECT COUNT(*) FROM STUDENT_INFO;";
+        String teacherQuery = "SELECT COUNT(*) FROM USERS_LOGIN_DATA WHERE ROLE='Teacher';";
+        String courseQuery = "SELECT COUNT(*) FROM COURSES_INFO;";
+        String moduleQuery = "SELECT COUNT(*) FROM MODULES_INFO;";
+        HashMap<String,Integer> data = new HashMap<>();
+        try {
+            Statement studentSt = connection.createStatement();
+            Statement teacherSt = connection.createStatement();
+            Statement courseSt = connection.createStatement();
+            Statement moduleSt = connection.createStatement();
+
+            ResultSet student = studentSt.executeQuery(studentQuery);
+            ResultSet teacher = teacherSt.executeQuery(teacherQuery);
+            ResultSet course = courseSt.executeQuery(courseQuery);
+            ResultSet module = moduleSt.executeQuery(moduleQuery);
+
+            while (student.next()){data.put("student",student.getInt(1));}
+            while (teacher.next()) {data.put("teacher",teacher.getInt(1));}
+            while (course.next()) {data.put("course",course.getInt(1));}
+            while(module.next()) {data.put("module",module.getInt(1));}
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return data;
     }
 }
