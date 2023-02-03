@@ -5,8 +5,7 @@ import UI.LoginPage;
 public class Main {
 
     static void createAndShowGUI(){
-       Admin admin = new Admin("ADMIN");
-        new Homepage(admin);
+       new LoginPage();
     }
     public static void main(String[] args) {
                 javax.swing.SwingUtilities.invokeLater(new Runnable() {
