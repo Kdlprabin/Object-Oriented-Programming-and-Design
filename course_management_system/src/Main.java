@@ -1,5 +1,3 @@
-import Backend.Users.Admin;
-import UI.Homepage;
 import UI.LoginPage;
 
 public class Main {
@@ -8,12 +6,7 @@ public class Main {
        new LoginPage();
     }
     public static void main(String[] args) {
-                javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+                javax.swing.SwingUtilities.invokeLater(Main::createAndShowGUI);
 
     }
 }
