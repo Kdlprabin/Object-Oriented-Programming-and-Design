@@ -1,6 +1,7 @@
 package Data;
 
 import java.sql.*;
+import java.util.Objects;
 
 public class Database {
 
@@ -19,9 +20,7 @@ public class Database {
         }
         catch (ClassNotFoundException e) {
             System.out.println("Class was not found");
-        }catch(NullPointerException e){
-            createDatabase("jdbc:mysql://localhost/",username,password);
-        }catch(SQLException e){
+        }catch(NullPointerException | SQLException e){
             createDatabase("jdbc:mysql://localhost/",username,password);
         }
         return null;
@@ -34,12 +33,12 @@ public class Database {
             while (res.next()){
                 admin = res.getString("username");
             }
-            if(admin == ""){
+            if(Objects.equals(admin, "")){
                 Statement statement = connection.createStatement();
                 statement.executeUpdate("INSERT INTO USERS_LOGIN_DATA(role,username,password)VALUES('ADMIN','ADMIN','ADMIN');");
             }
         }catch (SQLException e){
-            System.out.println(e);
+            new CreateTables(connection);
         }
     }
     public void createDatabase(String url, String username,String password){
@@ -51,9 +50,7 @@ public class Database {
                 Statement st = connection.createStatement();
                 st.executeUpdate("CREATE DATABASE IF NOT EXISTS course_management_system;");
             }
-        }catch(SQLException e){
-            System.out.println(e);
-        }catch(ClassNotFoundException e){
+        }catch(SQLException | ClassNotFoundException e){
             System.out.println(e);
         }
     }
@@ -61,8 +58,7 @@ public class Database {
         String url = "jdbc:mysql://localhost/course_management_system";
         String username = "root";
         String password = "Chitwannepal#4";
-        Connection connection = loadDriver(url,username,password);
-        return connection;
+        return loadDriver(url,username,password);
     }
 
 }
