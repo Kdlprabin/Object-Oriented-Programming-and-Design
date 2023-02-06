@@ -1,20 +1,19 @@
 package UI;
 
-import Backend.Courses;
 import Backend.Users.Admin;
 import Backend.Users.Student;
 import Backend.Users.Teacher;
 import UI.Helpers.Effects;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Homepage extends JFrame {
 
-    private JPanel sideBar, mainBoard, Dashboard;
+    private JPanel Dashboard;
     private JButton logoutButton,dashboardButton,studentsButton,studentsReportButton,instructorsButton,coursesButton;
     private JLabel welcomeMessage;
     private JLabel totalInstructorsCount;
@@ -23,14 +22,9 @@ public class Homepage extends JFrame {
     private JLabel totalModulesCount;
     private JPanel Home;
     private JPanel StudentReport;
-    private JList ID;
-    private JList studentName;
-    private JList CourseName;
-    private JList moduleName;
     private JButton StudentReportAddB;
     private JButton StudentReportDeleteB;
-    private JTextField StudentsReportNameTF;
-    private JTextField textField2;
+    private JTextField StudentsReportNameTF,textField2;
     private JPanel Teacher;
     private JTable studentReportTable;
     private JButton StudentReportEditB;
@@ -40,7 +34,7 @@ public class Homepage extends JFrame {
     private JPanel Student;
     private JTable studentTable;
     private JTextField StudentsNameTF;
-    private JComboBox StudentsCourseTF;
+    private JComboBox<String> StudentsCourseTF;
     private JButton StudentsAddB;
     private JTextField StudentsReportModuleTF;
     private JButton StudentsDeleteB;
@@ -55,8 +49,8 @@ public class Homepage extends JFrame {
     private JTextField CourseCostTF;
     private JButton StudentsEditB;
     private JTextField InstructorsNameTF;
-    private JComboBox InstructorsCourseTF;
-    private JComboBox InstructorsModuleTF;
+    private JComboBox<String> InstructorsCourseTF;
+    private JComboBox<String> InstructorsModuleTF;
     private JButton InstructorsAddB;
     private JButton InstructorsDeleteB;
     private JButton InstructorsEditB;
@@ -68,8 +62,6 @@ public class Homepage extends JFrame {
     private JPanel InstructorsCRUD;
     private JPanel CourseHeaders;
     private JPanel CourseCRUD;
-    private JPanel StudentsHeaders;
-    private JPanel StudentsCRUD;
     private JTable enrollmentTable;
     private JPanel Enrollment;
     private JButton enrollmentButton;
@@ -81,8 +73,10 @@ public class Homepage extends JFrame {
     private JButton ModuleAddB;
     private JButton ModuleDeleteB;
     private JButton ModuleEditB;
-    private JComboBox ModuleCourseName;
-    private JList marks;
+    private JComboBox<String> ModuleCourseName;
+    private JPanel ModuelsCRUD;
+    private JPanel ModulesHeaders;
+    private JButton enrollButton;
 
     private final String username;
     private final String email;
@@ -132,7 +126,7 @@ public class Homepage extends JFrame {
             }
         });
         StudentsAddB.addActionListener(e ->{
-            if(StudentsNameTF.getText().equals("") || StudentsCourseTF.getSelectedItem().equals("")){
+            if(StudentsNameTF.getText().equals("") || Objects.equals(StudentsCourseTF.getSelectedItem(), "")){
                 JOptionPane.showMessageDialog(this,"Empty input fields");
             }else{
                 admin.addStudent(StudentsNameTF.getText(),(String) StudentsCourseTF.getSelectedItem());
@@ -162,11 +156,7 @@ public class Homepage extends JFrame {
                     StudentsEditB.setForeground(Color.white);
                     StudentsNameTF.setText("");
                 }
-                if(hasClickedEditStudents){
-                    hasClickedEditStudents = false;
-                }else{
-                    hasClickedEditStudents = true;
-                }
+                hasClickedEditStudents = !hasClickedEditStudents;
             }
 
         });
@@ -215,11 +205,7 @@ public class Homepage extends JFrame {
                     StudentsNameTF.setText("");
                     StudentsReportModuleTF.setText("");
                 }
-                if(hasClickedEditStudentReport){
-                    hasClickedEditStudentReport = false;
-                }else{
-                    hasClickedEditStudentReport = true;
-                }
+                hasClickedEditStudentReport = !hasClickedEditStudentReport;
             }
 
         });
@@ -275,71 +261,7 @@ public class Homepage extends JFrame {
                     CourseCostTF.setText("");
                     setAdminOptionBox(admin);
                 }
-                if(hasClickedEditCourse){
-                    hasClickedEditCourse = false;
-                }else{
-                    hasClickedEditCourse = true;
-                }
-            }
-
-        });
-    }
-    void coursesCRUD(Teacher teacher){
-        courseTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        DefaultTableModel model = (DefaultTableModel) courseTable.getModel();
-        CourseDeleteB.addActionListener(e->{
-            int row =courseTable.getSelectedRow();
-            if(row==-1){
-                JOptionPane.showMessageDialog(this,"Please select a row to Delete.");
-            }else{
-                teacher.deleteCourse(model.getValueAt(row,0).toString());
-                teacher.fetchCourseData(courseTable);
-                setTeacherOptionBox(teacher);
-                setCountValues(teacher);
-            }
-        });
-        CourseAddB.addActionListener(e ->{
-            if(CourseNameTF.getText().equals("") || CourseCostTF.getText().equals("")){
-                JOptionPane.showMessageDialog(this,"Empty input fields");
-            }else{
-                if(teacher.addCourse(CourseNameTF.getText(),CourseCostTF.getText())){
-                    JOptionPane.showMessageDialog(this,"Please Enter valid values");
-                }
-                teacher.fetchCourseData(courseTable);
-                CourseNameTF.setText("");
-                CourseCostTF.setText("");
-                setTeacherOptionBox(teacher);
-                setCountValues(teacher);
-            }
-        });
-        CourseEditB.addActionListener(e->{
-            int row =courseTable.getSelectedRow();
-            if(row==-1 &&!hasClickedEditCourse){
-                JOptionPane.showMessageDialog(this,"Please select a row to Edit.");
-            }else {
-                if(!hasClickedEditCourse){
-                    CourseNameTF.setText(model.getValueAt(row, 1).toString());
-                    CourseCostTF.setText(model.getValueAt(row, 2).toString());
-                    this.courseEditID = model.getValueAt(row,0).toString();
-                    CourseEditB.setText("Change");
-                    CourseEditB.setBackground(Color.yellow);
-                    CourseEditB.setForeground(Color.black);
-                }
-                if (hasClickedEditCourse) {
-                    teacher.editCourse(courseEditID, CourseNameTF.getText(), CourseCostTF.getText());
-                    teacher.fetchCourseData(courseTable);
-                    CourseEditB.setText("Edit");
-                    CourseEditB.setBackground(new Color(38, 140, 242));
-                    CourseEditB.setForeground(Color.white);
-                    CourseCostTF.setText("");
-                    CourseCostTF.setText("");
-                    setTeacherOptionBox(teacher);
-                }
-                if(hasClickedEditCourse){
-                    hasClickedEditCourse = false;
-                }else{
-                    hasClickedEditCourse = true;
-                }
+                hasClickedEditCourse = !hasClickedEditCourse;
             }
 
         });
@@ -360,7 +282,7 @@ public class Homepage extends JFrame {
             }
         });
         ModuleAddB.addActionListener(e ->{
-            if(ModuleCourseName.getSelectedItem().equals("")||ModuleNameTF.getText().equals("") || ModuleTypeTF.getSelectedItem().equals("")){
+            if(Objects.equals(ModuleCourseName.getSelectedItem(), "") ||ModuleNameTF.getText().equals("") || Objects.equals(ModuleTypeTF.getSelectedItem(), "")){
                 JOptionPane.showMessageDialog(this,"Empty input fields");
             }else{
                 admin.addModule((String) ModuleCourseName.getSelectedItem(),ModuleNameTF.getText(),(String)ModuleTypeTF.getSelectedItem());
@@ -384,18 +306,65 @@ public class Homepage extends JFrame {
                     ModuleEditB.setForeground(Color.black);
                 }
                 if (hasClickedEditModule) {
-                    admin.editModule(moduleEditID, ModuleNameTF.getText(), (String)ModuleCourseName.getSelectedItem(),(String)ModuleTypeTF.getSelectedItem());
+                    admin.editModule(moduleEditID, ModuleNameTF.getText(),(String)ModuleCourseName.getSelectedItem(),(String)ModuleTypeTF.getSelectedItem());
                     admin.fetchModuleTableData(moduleTable);
                     ModuleEditB.setText("Edit");
                     ModuleEditB.setBackground(new Color(38, 140, 242));
                     ModuleEditB.setForeground(Color.white);
                     ModuleNameTF.setText("");
                 }
-                if(hasClickedEditModule){
-                    hasClickedEditModule = false;
-                }else{
-                    hasClickedEditModule = true;
+                hasClickedEditModule = !hasClickedEditModule;
+            }
+
+        });
+    }
+    void modulesCRUD(Teacher teacher){
+        setTeacherOptionBox(teacher);
+        moduleTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        DefaultTableModel model = (DefaultTableModel) moduleTable.getModel();
+        ModuleDeleteB.addActionListener(e->{
+            int row =moduleTable.getSelectedRow();
+            if(row==-1){
+                JOptionPane.showMessageDialog(this,"Please select a row to Delete.");
+            }else{
+                teacher.deleteModule(model.getValueAt(row,0).toString());
+                teacher.fetchCourseData(moduleTable);
+                setCountValues(teacher);
+            }
+        });
+        ModuleAddB.addActionListener(e ->{
+            if(Objects.equals(ModuleCourseName.getSelectedItem(), "") ||ModuleNameTF.getText().equals("") || Objects.equals(ModuleTypeTF.getSelectedItem(), "")){
+                JOptionPane.showMessageDialog(this,"Empty input fields");
+            }else{
+                teacher.addModule((String) ModuleCourseName.getSelectedItem(),ModuleNameTF.getText(),(String)ModuleTypeTF.getSelectedItem());
+                teacher.fetchModuleTableData(moduleTable);
+                ModuleNameTF.setText("");
+                setCountValues(teacher);
+            }
+        });
+        ModuleEditB.addActionListener(e->{
+            int row =moduleTable.getSelectedRow();
+            if(row==-1 &&!hasClickedEditModule){
+                JOptionPane.showMessageDialog(this,"Please select a row to Edit.");
+            }else {
+                if(!hasClickedEditModule){
+                    ModuleCourseName.setSelectedItem(model.getValueAt(row, 1).toString());
+                    ModuleNameTF.setText(model.getValueAt(row, 2).toString());
+                    ModuleTypeTF.setSelectedItem(model.getValueAt(row,3).toString());
+                    this.moduleEditID = model.getValueAt(row,0).toString();
+                    ModuleEditB.setText("Change");
+                    ModuleEditB.setBackground(Color.yellow);
+                    ModuleEditB.setForeground(Color.black);
                 }
+                if (hasClickedEditModule) {
+                    teacher.editModule(moduleEditID, ModuleNameTF.getText(),(String)ModuleCourseName.getSelectedItem(),(String)ModuleTypeTF.getSelectedItem());
+                    teacher.fetchModuleTableData(moduleTable);
+                    ModuleEditB.setText("Edit");
+                    ModuleEditB.setBackground(new Color(38, 140, 242));
+                    ModuleEditB.setForeground(Color.white);
+                    ModuleNameTF.setText("");
+                }
+                hasClickedEditModule = !hasClickedEditModule;
             }
 
         });
@@ -411,8 +380,13 @@ public class Homepage extends JFrame {
             StudentsCourseTF.addItem(s);
             InstructorsCourseTF.addItem(s);
         }
+        String course =(String)InstructorsCourseTF.getSelectedItem();
+        ArrayList<String> dModules = admin.getModuleList(course);
+        InstructorsModuleTF.removeAllItems();
+        for(String s:dModules){
+            InstructorsModuleTF.addItem(s);
+        }
         InstructorsCourseTF.addActionListener(e->{
-            System.out.println(InstructorsCourseTF.getSelectedItem());
             String selectCourse =(String)InstructorsCourseTF.getSelectedItem();
             ArrayList<String> modules = admin.getModuleList(selectCourse);
             InstructorsModuleTF.removeAllItems();
@@ -421,22 +395,34 @@ public class Homepage extends JFrame {
             }
         });
     }
+    void enrollmentHandler(Student student){
+            enrollmentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            DefaultTableModel model = (DefaultTableModel) enrollmentTable.getModel();
+            enrollButton.addActionListener(e->{
+                int row =enrollmentTable.getSelectedRow();
+                if(row==-1){
+                    JOptionPane.showMessageDialog(this,"Please select a row to Delete.");
+                }else{
+                    if(!model.getValueAt(row,2).equals("Not Enrolled")){
+                        student.enrollModules(model.getValueAt(row,3).toString());
+                        student.fetchEnrollmentTableData(enrollmentTable);
+                    }else{
+                        JOptionPane.showMessageDialog(this,"Enrollment Failed");
+                    }
+                }
+            });
+    }
     void setTeacherOptionBox(Teacher teacher){
         String course = teacher.getCourseName();
-        ModuleCourseName.removeAllItems();
         StudentsCourseTF.removeAllItems();
-        ModuleCourseName.addItem(course);
+        ModuleCourseName.removeAllItems();
         StudentsCourseTF.addItem(course);
         InstructorsCourseTF.addItem(course);
         ArrayList<String> modules = teacher.getModuleList();
         InstructorsModuleTF.removeAllItems();
+        ModuleCourseName.addItem(course);
         for(String s:modules){
             InstructorsModuleTF.addItem(s);
-        }
-    }
-    void setStudentOptionBox(Student student){
-        ArrayList<String> Courses = new ArrayList<>();
-        for(String s:Courses){
         }
     }
     void instructorCRUD(Admin admin){
@@ -453,7 +439,7 @@ public class Homepage extends JFrame {
             }
         });
         InstructorsAddB.addActionListener(e ->{
-            if(InstructorsNameTF.getText().equals("") || InstructorsCourseTF.getSelectedItem().equals("") || InstructorsModuleTF.getSelectedItem().equals("")){
+            if(InstructorsNameTF.getText().equals("") || Objects.equals(InstructorsCourseTF.getSelectedItem(), "") || Objects.equals(InstructorsModuleTF.getSelectedItem(), "")){
                 JOptionPane.showMessageDialog(this,"Empty input fields");
             }else{
                 admin.addTeacher(InstructorsNameTF.getText(),(String)InstructorsCourseTF.getSelectedItem(),(String) InstructorsModuleTF.getSelectedItem());
@@ -531,6 +517,8 @@ public class Homepage extends JFrame {
         setCountValues(admin);
         studentsCRUD(admin);
         instructorCRUD(admin);
+        ModuelsCRUD.setVisible(true);
+        ModulesHeaders.setVisible(true);
         studentsReportButton.setVisible(false);
         StudentNav.setVisible(true);
         TeacherNav.setVisible(true);
@@ -543,12 +531,15 @@ public class Homepage extends JFrame {
         studentsReportButton.setVisible(true);
         studentsButton.setVisible(false);
         enrollmentButton.setVisible(false);
-        teacher.fetchModuleTableData(moduleTable,this.username);
+        modulesCRUD(teacher);
+        teacher.fetchModuleTableData(moduleTable);
         teacher.fetchStudentReportTableData(studentReportTable);
         teacher.fetchCourseData(courseTable);
         studentsReportButtonCRUD(teacher);
         setTeacherOptionBox(teacher);
         CourseCRUD.setVisible(false);
+        ModuelsCRUD.setVisible(false);
+        ModulesHeaders.setVisible(false);
         CourseHeaders.setVisible(false);
         StudentNav.setVisible(true);
         TeacherNav.setVisible(false);
@@ -576,11 +567,14 @@ public class Homepage extends JFrame {
         InstructorsCRUD.setVisible(false);
         CourseHeaders.setVisible(false);
         CourseCRUD.setVisible(false);
+        ModuelsCRUD.setVisible(false);
+        ModulesHeaders.setVisible(false);
         student.fetchEnrollmentTableData(enrollmentTable);
         student.fetchStudentReportTableData(studentReportTable);
         student.fetchCourseData(courseTable);
         student.fetchTeacherData(teacherTable,student.getCourseName());
         setCountValues(student);
+        enrollmentHandler(student);
     }
     //navigation
     void navigation(){

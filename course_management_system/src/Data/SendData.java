@@ -19,20 +19,20 @@ public class SendData {
         Statement st1 = connection.createStatement();
         ResultSet res = checkStatement.executeQuery("SELECT * FROM USERS_LOGIN_DATA");
         while (res.next()){
-            String userStat = res.getString("username");
+            String userStat = res.getString("USERNAME");
             if(userStat.equals(signupData.username)){
                 throw new UserExistsException();
             }
         }
         try{
-            st.executeUpdate("INSERT INTO USERS_LOGIN_DATA(role,username,email,password) VALUES('"+signupData.role+"','" + signupData.username + "','" + signupData.email + "','" + signupData.password + "');");
+            st.executeUpdate("INSERT INTO USERS_LOGIN_DATA(ROLE,USERNAME,EMAIL,PASSWORD) VALUES('"+signupData.role+"','" + signupData.username + "','" + signupData.email + "','" + signupData.password + "');");
             switch(signupData.role){
                 case "teacher"->{
-                    st1.executeUpdate("INSERT INTO TEACHER_INFO(Teacher_Name) VALUES('"+signupData.username+"');");
+                    st1.executeUpdate("INSERT INTO TEACHER_INFO(TEACHER_NAME) VALUES('"+signupData.username+"');");
                     break;
                 }
                 case "student"->{
-                    st1.executeUpdate("INSERT INTO STUDENT_INFO(Student_Name) VALUES('"+signupData.username+"');");
+                    st1.executeUpdate("INSERT INTO STUDENT_INFO(STUDENT_NAME) VALUES('"+signupData.username+"');");
                 }
             }
         }catch(SQLException e){

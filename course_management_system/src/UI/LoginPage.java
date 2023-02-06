@@ -6,10 +6,7 @@ import Backend.Users.Student;
 import Backend.Users.Teacher;
 import Data.FetchData;
 import UI.Helpers.Effects;
-
 import javax.swing.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.util.HashMap;
 
 public class LoginPage extends JFrame{
@@ -47,7 +44,6 @@ public class LoginPage extends JFrame{
                             Admin admin = new Admin(username);
                             new Homepage(admin);
                         }
-                        default -> System.out.println(loginInfo.get("role"));
                     }
                 }else{
                     passwordInvalid.setVisible(true);
