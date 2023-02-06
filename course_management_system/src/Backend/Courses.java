@@ -1,5 +1,6 @@
 package Backend;
 
+import Backend.Exceptions.CourseNotFoundException;
 import Data.Database;
 
 import java.sql.Connection;
@@ -20,9 +21,9 @@ public class Courses {
                 List.add(res.getString("courseName"));
             }
         } catch (SQLException e) {
-            System.out.println("SQL Exception");
+            throw new RuntimeException(e);
         }catch (NullPointerException E){
-            System.out.println("The database is empty");
+            throw new CourseNotFoundException();
         }
         return List;
     }

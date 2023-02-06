@@ -16,15 +16,19 @@ public class Database {
                 System.out.println("Connection successful");
                 new CreateTables(connection);
             }
+            connection.setAutoCommit(true);
             return connection;
         }
         catch (ClassNotFoundException e) {
-            System.out.println("Class was not found");
+            System.out.println("Error: JDBC driver class not found");
+            return null;
         }catch(NullPointerException | SQLException e){
+            System.out.println("Error: Failed to create database connection");
             createDatabase("jdbc:mysql://localhost/",username,password);
+            return null;
         }
-        return null;
     }
+
     public void createAdmin(Connection connection) {
         String admin= "";
         try{
@@ -35,7 +39,7 @@ public class Database {
             }
             if(Objects.equals(admin, "")){
                 Statement statement = connection.createStatement();
-                statement.executeUpdate("INSERT INTO USERS_LOGIN_DATA(role,username,password)VALUES('ADMIN','ADMIN','ADMIN');");
+                statement.executeUpdate("INSERT INTO USERS_LOGIN_DATA(ROLE,USERNAME,PASSWORD)VALUES('ADMIN','ADMIN','ADMIN');");
             }
         }catch (SQLException e){
             new CreateTables(connection);
@@ -51,9 +55,10 @@ public class Database {
                 st.executeUpdate("CREATE DATABASE IF NOT EXISTS course_management_system;");
             }
         }catch(SQLException | ClassNotFoundException e){
-            System.out.println(e);
+            System.out.println("Error: Failed to create database");
         }
     }
+
     public Connection connectToDatabase(){
         String url = "jdbc:mysql://localhost/course_management_system";
         String username = "root";

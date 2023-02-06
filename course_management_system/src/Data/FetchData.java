@@ -16,10 +16,10 @@ public class FetchData {
         Connection connection = database.connectToDatabase();
         try {
             Statement st = connection.createStatement();
-            ResultSet res = st.executeQuery("SELECT * FROM USERS_LOGIN_DATA WHERE username='" + username + "';");
+            ResultSet res = st.executeQuery("SELECT * FROM USERS_LOGIN_DATA WHERE USERNAME='" + username + "';");
             while (res.next()) {
-                loginInfo.put("password", res.getString("password"));
-                loginInfo.put("role",res.getString("role"));
+                loginInfo.put("password", res.getString("PASSWORD"));
+                loginInfo.put("role",res.getString("ROLE"));
             }
             loginInfo.put("username", username);
         }catch(NullPointerException e){
