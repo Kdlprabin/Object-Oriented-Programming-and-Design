@@ -4,66 +4,68 @@ import java.sql.*;
 import java.util.Objects;
 
 public class Database {
-
-    public Database(){
+    private String mode;
+    public Database(String mode) {
+        this.mode = mode;
         createAdmin(connectToDatabase());
     }
-    private Connection loadDriver(String url, String username, String password){
+
+    private Connection loadDriver(String url, String username, String password) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, username, password);
             if (!connection.isClosed()) {
-                System.out.println("Connection successful");
+                System.out.println(mode+" : Connection successful");
                 new CreateTables(connection);
             }
             connection.setAutoCommit(true);
             return connection;
-        }
-        catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             System.out.println("Error: JDBC driver class not found");
             return null;
-        }catch(NullPointerException | SQLException e){
+        } catch (NullPointerException | SQLException e) {
             System.out.println("Error: Failed to create database connection");
-            createDatabase("jdbc:mysql://localhost/",username,password);
+            createDatabase("jdbc:mysql://localhost/", username, password);
             return null;
         }
     }
 
     public void createAdmin(Connection connection) {
-        String admin= "";
-        try{
+        String admin = "";
+        try {
             Statement st = connection.createStatement();
             ResultSet res = st.executeQuery("SELECT * FROM USERS_LOGIN_DATA WHERE ROLE='admin';");
-            while (res.next()){
+            while (res.next()) {
                 admin = res.getString("username");
             }
-            if(Objects.equals(admin, "")){
+            if (Objects.equals(admin, "")) {
                 Statement statement = connection.createStatement();
-                statement.executeUpdate("INSERT INTO USERS_LOGIN_DATA(ROLE,USERNAME,PASSWORD)VALUES('ADMIN','ADMIN','ADMIN');");
+                statement.executeUpdate(
+                        "INSERT INTO USERS_LOGIN_DATA(ROLE,USERNAME,EMAIL,PASSWORD)VALUES('ADMIN','ADMIN','admin@gmail.com','ADMIN');");
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             new CreateTables(connection);
         }
     }
-    public void createDatabase(String url, String username,String password){
-        try{
+
+    public void createDatabase(String url, String username, String password) {
+        try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, username, password);
             if (!connection.isClosed()) {
-                System.out.println("Connection successful");
+                System.out.println("Create database: Connection successful");
                 Statement st = connection.createStatement();
                 st.executeUpdate("CREATE DATABASE IF NOT EXISTS course_management_system;");
             }
-        }catch(SQLException | ClassNotFoundException e){
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println("Error: Failed to create database");
         }
     }
 
-    public Connection connectToDatabase(){
+    public Connection connectToDatabase() {
         String url = "jdbc:mysql://localhost/course_management_system";
         String username = "root";
         String password = "Chitwannepal#4";
-        return loadDriver(url,username,password);
+        return loadDriver(url, username, password);
     }
-
 }

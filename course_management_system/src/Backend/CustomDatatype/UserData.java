@@ -11,7 +11,6 @@ public class UserData {
         this.course = course;
     }
 
-
     public UserData(String username) {
         this.username = username;
     }

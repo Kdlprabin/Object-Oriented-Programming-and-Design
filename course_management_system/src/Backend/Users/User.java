@@ -12,8 +12,9 @@ public abstract class User {
 
     public String username;
     public String email;
-    Database database = new Database();
-    public final Connection connection = database.connectToDatabase();
+    private final Database database = new Database("User ");
+    public Connection connection = database.connectToDatabase();
+
     public String getUsername() {
         return username;
     }
@@ -21,6 +22,7 @@ public abstract class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getEmail() {
         return email;
     }
@@ -28,8 +30,8 @@ public abstract class User {
     public void setEmail() {
         try {
             Statement st = connection.createStatement();
-            ResultSet res = st.executeQuery("SELECT * FROM USERS_LOGIN_DATA WHERE USERNAME='"+username+"';");
-            while (res.next()){
+            ResultSet res = st.executeQuery("SELECT * FROM USERS_LOGIN_DATA WHERE USERNAME='" + username + "';");
+            while (res.next()) {
                 this.email = res.getString("EMAIL");
             }
         } catch (SQLException e) {
@@ -70,5 +72,15 @@ public abstract class User {
             throw new RuntimeException(e);
         }
         return data;
+    }
+    public void logout(){
+        this.username = null;
+        this.email = null;
+        try {
+            this.connection.close();
+            System.out.println("user connection closed");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

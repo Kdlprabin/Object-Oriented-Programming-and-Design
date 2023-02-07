@@ -1,7 +1,7 @@
 package Backend.Exceptions;
 
-public class CourseNotFoundException extends RuntimeException{
-    public CourseNotFoundException(){
+public class CourseNotFoundException extends RuntimeException {
+    public CourseNotFoundException() {
         super("Course not found");
     }
 }

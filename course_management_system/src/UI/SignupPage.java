@@ -1,17 +1,13 @@
 package UI;
 
 import Backend.Exceptions.UserExistsException;
-import Backend.Users.Student;
 import Backend.Validate;
 import Data.SendData;
 import Backend.CustomDatatype.SignupData;
 import UI.Helpers.Effects;
 import UI.Helpers.MyColor;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.sql.SQLException;
 
 public class SignupPage extends JFrame{
@@ -26,10 +22,7 @@ public class SignupPage extends JFrame{
         invalidEmail.setVisible(!validate.validateEmail(email));
         invalidPassword.setVisible(!validate.validatePassword(password));
         invalidUsername.setVisible(!validate.validateUsername(username));
-        if(validate.validateEmail(email) && validate.validateUsername(username) && validate.validatePassword(password) && role != null){
-            return true;
-        }
-        return false;
+        return validate.validateEmail(email) && validate.validateUsername(username) && validate.validatePassword(password) && role != null;
     }
     private void registerHandler(){
         registerButton.addActionListener(e->{
@@ -89,6 +82,7 @@ public class SignupPage extends JFrame{
         registerHandler();
         returnHandler();
 //        setUndecorated(true);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setVisible(true);
     }
 }
