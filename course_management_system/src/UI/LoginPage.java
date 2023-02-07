@@ -6,13 +6,15 @@ import Backend.Users.Student;
 import Backend.Users.Teacher;
 import Data.FetchData;
 import UI.Helpers.Effects;
+import UI.Helpers.MyColor;
+
 import javax.swing.*;
 import java.util.HashMap;
 
 public class LoginPage extends JFrame{
-    FetchData fetchData = new FetchData();
+    private FetchData fetchData = new FetchData();
+    private MyColor myColor = new MyColor();
     private JPanel LoginPage;
-    private JPanel Content;
     private JTextField emailField;
     private JButton signupButton;
     private JTextField passwordField;
@@ -32,18 +34,18 @@ public class LoginPage extends JFrame{
                 if (loginInfo.get("password").equals(password)) {
                     setVisible(false);
                     switch (loginInfo.get("role").toLowerCase()) {
-                        case "student" -> {
+                        case "student":
                             Student student = new Student(username);
                             new Homepage(student);
-                        }
-                        case "teacher" -> {
+                            break;
+                        case "teacher":
                             Teacher teacher = new Teacher(username);
                             new Homepage(teacher);
-                        }
-                        case "admin" -> {
+                            break;
+                        case "admin":
                             Admin admin = new Admin(username);
                             new Homepage(admin);
-                        }
+                            break;
                     }
                 }else{
                     passwordInvalid.setVisible(true);
@@ -68,5 +70,6 @@ public class LoginPage extends JFrame{
         loginHandler();
         signupHandler();
         setVisible(true);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 }
