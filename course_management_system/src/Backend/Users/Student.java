@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
+import static java.lang.Integer.parseInt;
+
 public class Student extends User {
     public Student(String username) {
         this.username = username;
@@ -28,16 +30,18 @@ public class Student extends User {
             while (res.next()) {
                 if (res.getString("COURSE_NAME") != null) {
                     courseName = res.getString("COURSE_NAME");
+                    return courseName;
                 }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return courseName;
+        return null;
     }
 
     public void fetchTeacherData(JTable table, String courseName) {
-        String query = "SELECT * FROM TEACHER_INFO WHERE COURSE_NAME='" + courseName + "'";
+        String query = "SELECT ID,TEACHER_NAME,MODULE_NAME,COURSE_NAME FROM TEACHER_INFO WHERE COURSE_NAME='"+courseName+"';";
+        System.out.println(courseName);
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         try {
@@ -51,11 +55,12 @@ public class Student extends User {
                 model.setColumnIdentifiers(colName);
             }
             while (res.next()) {
+                System.out.println(res.getString("ID"));
                 String id = String.valueOf(res.getInt("ID"));
                 String module = String.valueOf(res.getString("MODULE_NAME"));
                 String course = String.valueOf(res.getString("COURSE_NAME"));
                 String name = String.valueOf(res.getString("TEACHER_NAME"));
-                String[] tbData = { id, name, course, module };
+                String[] tbData = { id, name, module, course };
                 model.addRow(tbData);
             }
         } catch (SQLException e) {
@@ -90,6 +95,7 @@ public class Student extends User {
             throw new RuntimeException(e);
         }
     }
+
 
     public void fetchStudentResultTableData(JTable table) {
         String query = "SELECT ID,MODULE_NAME,MARKS_OBTAINED FROM STUDENT_ENROLLMENT WHERE STUDENT_NAME='" + username

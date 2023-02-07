@@ -7,12 +7,23 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Teacher extends User {
+    private String moduleName;
     public Teacher(String username) {
         this.username = username;
         setEmail();
-
+        setModuleName();
     }
-
+    void setModuleName(){
+        try {
+            Statement st = connection.createStatement();
+            ResultSet res =st.executeQuery("SELECT MODULE_NAME FROM TEACHER_INFO WHERE TEACHER_NAME='"+username+"'");
+            while (res.next()){
+                this.moduleName = res.getString("MODULE_NAME");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public void addMarks(String studentName, String moduleName, String marks) {
         try {
             Statement addMarksSt = connection.createStatement();
@@ -44,7 +55,7 @@ public class Teacher extends User {
     }
 
     public void fetchStudentResultTableData(JTable table) {
-        String query = "SELECT ID,STUDENT_NAME,MODULE_NAME,MARKS_OBTAINED FROM STUDENT_ENROLLMENT WHERE STATUS='ENROLLED';";
+        String query = "SELECT ID,STUDENT_NAME,MODULE_NAME,MARKS_OBTAINED FROM STUDENT_ENROLLMENT WHERE STATUS='ENROLLED' AND MODULE_NAME='"+moduleName+"';";
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
         try {

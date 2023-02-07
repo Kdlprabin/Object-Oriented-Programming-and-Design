@@ -49,10 +49,13 @@ public class Admin extends User {
 
     }
 
-    public void deleteStudent(String id) {
+    public void deleteStudent(String id,String studentName) {
         try {
             Statement st = connection.createStatement();
+            Statement st1 = connection.createStatement();
+
             st.executeUpdate("DELETE FROM STUDENT_INFO WHERE ID='" + id + "';");
+            st1.executeUpdate("DELETE FROM STUDENT_ENROLLMENT WHERE STUDENT_NAME='"+studentName+"'");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -124,8 +127,7 @@ public class Admin extends User {
             Statement st = connection.createStatement();
             Statement st1 = connection.createStatement();
             st.executeUpdate("DELETE FROM TEACHER_INFO WHERE id='" + id + "';");
-            st1.executeUpdate("UPDATE MODULES_INFO SET TEACHER_NAME ='Not assigned' WHERE TEACHER_NAME='" + teacherName
-                    + " AND MODULE_NAME='" + moduleName + "';");
+            st1.executeUpdate("UPDATE MODULES_INFO SET TEACHER_NAME ='Not assigned' WHERE TEACHER_NAME='" + teacherName + "' AND MODULE_NAME='" + moduleName + "';");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -194,7 +196,7 @@ public class Admin extends User {
                 String module = String.valueOf(res.getString("MODULE_NAME"));
                 String course = String.valueOf(res.getString("COURSE_NAME"));
                 String name = String.valueOf(res.getString("TEACHER_NAME"));
-                String[] tbData = { id, name, course, module };
+                String[] tbData = { id, name, module, course };
                 model.addRow(tbData);
             }
         } catch (SQLException e) {

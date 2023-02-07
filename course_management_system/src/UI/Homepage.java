@@ -10,6 +10,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
+import static java.lang.Integer.parseInt;
 
 public class Homepage extends JFrame {
 
@@ -26,6 +27,7 @@ public class Homepage extends JFrame {
     private JComboBox<String> StudentsCourseTF, InstructorsCourseTF, InstructorsModuleTF, ModuleTypeTF,
             ModuleCourseName;
     private JTable studentResultTable, teacherTable, courseTable, studentTable, enrollmentTable, moduleTable;
+
     private JLabel FullName, Email;
     private JPanel studentResultHeaders, studentsResultCRUD, InstructorsHeaders, InstructorsCRUD, CourseHeaders,
             CourseCRUD, Enrollment, Modules, ModulesCRUD, ModulesHeaders;
@@ -101,7 +103,7 @@ public class Homepage extends JFrame {
             if (row == -1) {
                 JOptionPane.showMessageDialog(this, "Please select a row to Delete.");
             } else {
-                admin.deleteStudent(model.getValueAt(row, 0).toString());
+                admin.deleteStudent(model.getValueAt(row, 0).toString(),(String)model.getValueAt(row,1));
                 admin.fetchStudentTableData(studentTable);
                 setCountValues(admin);
             }
@@ -155,11 +157,13 @@ public class Homepage extends JFrame {
             if (StudentsResultNameTF.getText().equals("") || StudentsResultMarksTF.getText().equals("")
                     || StudentsResultMarksTF.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Empty input fields");
-            } else {
-                teacher.addMarks(StudentsResultNameTF.getText(), StudentsResultModuleTF.getText(),
-                        StudentsResultMarksTF.getText());
-                teacher.fetchStudentResultTableData(studentResultTable);
-            }
+            } else if(parseInt(StudentsResultModuleTF.getText()) >100 || parseInt(StudentsResultMarksTF.getText())<0) {
+                JOptionPane.showMessageDialog(this,"Invalid input marks.");
+            } else{
+                    teacher.addMarks(StudentsResultNameTF.getText(), StudentsResultModuleTF.getText(),
+                            StudentsResultMarksTF.getText());
+                    teacher.fetchStudentResultTableData(studentResultTable);
+                }
         });
         StudentResultDeleteB.addActionListener(e -> {
             int row = studentResultTable.getSelectedRow();
@@ -185,15 +189,19 @@ public class Homepage extends JFrame {
                     StudentResultEditB.setForeground(Color.black);
                 }
                 if (hasClickedEditStudentResult) {
-                    teacher.editMarks(studentResultEditID, StudentsResultNameTF.getText(),
-                            StudentsResultModuleTF.getText(), StudentsResultMarksTF.getText());
-                    teacher.fetchStudentResultTableData(studentResultTable);
-                    StudentResultEditB.setText("Edit");
-                    StudentResultEditB.setBackground(new Color(38, 140, 242));
-                    StudentResultEditB.setForeground(Color.white);
-                    StudentsResultMarksTF.setText("");
-                    StudentsNameTF.setText("");
-                    StudentsResultModuleTF.setText("");
+                    if(parseInt(StudentsResultModuleTF.getText()) >100 || parseInt(StudentsResultMarksTF.getText())<0) {
+                        JOptionPane.showMessageDialog(this, "Invalid input marks.");
+                    }else {
+                        teacher.editMarks(studentResultEditID, StudentsResultNameTF.getText(),
+                                StudentsResultModuleTF.getText(), StudentsResultMarksTF.getText());
+                        teacher.fetchStudentResultTableData(studentResultTable);
+                        StudentResultEditB.setText("Edit");
+                        StudentResultEditB.setBackground(new Color(38, 140, 242));
+                        StudentResultEditB.setForeground(Color.white);
+                        StudentsResultMarksTF.setText("");
+                        StudentsNameTF.setText("");
+                        StudentsResultModuleTF.setText("");
+                    }
                 }
                 hasClickedEditStudentResult = !hasClickedEditStudentResult;
             }
@@ -396,8 +404,7 @@ public class Homepage extends JFrame {
                     || Objects.equals(InstructorsModuleTF.getSelectedItem(), "")) {
                 JOptionPane.showMessageDialog(this, "Empty input fields");
             } else {
-                admin.addTeacher(InstructorsNameTF.getText(), (String) InstructorsCourseTF.getSelectedItem(),
-                        (String) InstructorsModuleTF.getSelectedItem());
+                admin.addTeacher(InstructorsNameTF.getText(),(String) InstructorsModuleTF.getSelectedItem(), (String) InstructorsCourseTF.getSelectedItem());
                 admin.fetchTeacherData(teacherTable);
                 InstructorsNameTF.setText("");
                 setCountValues(admin);
