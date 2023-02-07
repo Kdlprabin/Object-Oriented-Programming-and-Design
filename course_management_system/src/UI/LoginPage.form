@@ -59,7 +59,7 @@
                   <toolTipText value=""/>
                 </properties>
               </component>
-              <component id="c177f" class="javax.swing.JTextField" binding="passwordField">
+              <component id="fae73" class="javax.swing.JPasswordField" binding="passwordField">
                 <constraints>
                   <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
                     <minimum-size width="346" height="40"/>
@@ -71,7 +71,7 @@
                   <background color="-1710619"/>
                   <font size="16"/>
                   <foreground color="-6316129"/>
-                  <text value="# Enter your password"/>
+                  <text value=""/>
                 </properties>
               </component>
               <component id="c69b3" class="javax.swing.JLabel" binding="emailInvalid">

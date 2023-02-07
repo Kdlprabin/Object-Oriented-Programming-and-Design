@@ -17,7 +17,7 @@ public class LoginPage extends JFrame{
     private JPanel LoginPage;
     private JTextField emailField;
     private JButton signupButton;
-    private JTextField passwordField;
+    private JPasswordField passwordField;
     private JLabel emailInvalid;
     private JLabel passwordInvalid;
     private JButton loginButton;
